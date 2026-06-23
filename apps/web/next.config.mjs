@@ -1,6 +1,11 @@
+import { legacyRedirects } from './redirects.mjs'
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ['@mccartney/ui', '@mccartney/crm', '@mccartney/search', '@mccartney/db'],
+  async redirects() {
+    return legacyRedirects()
+  },
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
