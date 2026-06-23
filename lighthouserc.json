@@ -3,7 +3,7 @@
     "collect": {
       "startServerCommand": "pnpm --filter @mccartney/web start",
       "startServerReadyPattern": "Ready in|started server on|Local:",
-      "url": ["http://localhost:3000/"],
+      "url": ["http://localhost:3007/"],
       "numberOfRuns": 3
     },
     "assert": {
