@@ -10,7 +10,6 @@ import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { getPayload } from 'payload'
-import config from '@payload-config'
 import { mapSeedCsv } from '@mccartney/db'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -24,6 +23,12 @@ async function main(): Promise<void> {
     /* no .env — rely on ambient env */
   }
 
+  // Seeding does per-row writes; skip per-row search indexing here. Bulk indexing is
+  // handled separately by the reindex script (avoids hundreds of index round-trips).
+  delete process.env.MEILISEARCH_HOST
+
+  // Import the config AFTER env is loaded — buildConfig reads env (secret, adapter) at eval time.
+  const { default: config } = await import('@payload-config')
   const payload = await getPayload({ config })
   const dataset = mapSeedCsv(readFileSync(csvPath, 'utf8'))
 
@@ -68,7 +73,7 @@ async function main(): Promise<void> {
       const created = await payload.create({
         collection: 'products',
         data: {
-          range: rangeId,
+          range: rangeId as number,
           name: p.name,
           slug: p.slug,
           sizeMm: p.sizeMm,
@@ -90,7 +95,7 @@ async function main(): Promise<void> {
     await payload.create({
       collection: 'stock',
       data: {
-        product: productId,
+        product: productId as number,
         status: s.status,
         statusRaw: s.statusRaw,
         batch: s.batch,

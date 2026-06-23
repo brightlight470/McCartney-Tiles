@@ -39,5 +39,9 @@ playwright-report/
 
 # Local data
 *.local.sqlite
+*.db
+*.db-shm
+*.db-wal
 /tmp/
 /.cache/
+/tools/

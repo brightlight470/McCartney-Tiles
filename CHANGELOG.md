@@ -3,6 +3,32 @@
 All notable changes to the McCartney Tiles Phase-1 build are recorded here.
 Versioning follows the client convention: **minor = 1.x**, **major = x.1**.
 
+## [1.2.0] — 2026-06-23
+
+### Added — local database + live faceted search (dev infrastructure)
+
+- Env-switched **SQLite dev adapter** (`DATABASE_ADAPTER=sqlite`) so the CMS, seed and search run
+  locally without Docker/Postgres. Postgres remains the production default — no schema change.
+- Seeded the local DB from the stock sheet: **93 ranges, 101 products, 175 stock records**.
+- **Reindex script** (`pnpm --filter @mccartney/cms reindex`) builds the Meilisearch products index
+  from the DB. Name-hint classifiers fill taxonomy the stock seed omits (index-only; canonical
+  values still come from staff-confirmed ingestion). `INDEX_ALL=1` indexes regardless of publish
+  for local verification.
+- Verified **live faceted search end-to-end** through the web app: 101 products indexed;
+  `/ranges?effect=wood` returns 10 results with live colour facet counts; CMS REST serves the
+  catalogue to range/product pages.
+
+### Fixed
+
+- Seed/reindex load `.env` and import the Payload config dynamically (`buildConfig` reads env at
+  evaluation time, so the static import ran before env was loaded).
+
+### Notes
+
+- Docker is blocked on this machine: WSL2 is not installed and Windows 11 Home has no Hyper-V, so
+  Docker Desktop's engine cannot start. For Postgres parity, run `wsl --install` (admin + reboot),
+  then `pnpm db:up && pnpm migrate && pnpm seed`.
+
 ## [1.1.0] — 2026-06-23
 
 ### Added — Sprint 1 (public spine; DB-independent slice)

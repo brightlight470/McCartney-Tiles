@@ -2,6 +2,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import { buildConfig } from 'payload'
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import sharp from 'sharp'
 
@@ -40,9 +41,16 @@ export default buildConfig({
     Showrooms,
   ],
   editor: lexicalEditor(),
-  db: postgresAdapter({
-    pool: { connectionString: process.env.DATABASE_URI ?? '' },
-  }),
+  // Postgres is the production/default adapter. DATABASE_ADAPTER=sqlite selects a
+  // local file DB for development on machines without Docker/Postgres (no schema/prod change).
+  db:
+    process.env.DATABASE_ADAPTER === 'sqlite'
+      ? sqliteAdapter({
+          client: { url: process.env.SQLITE_URL ?? 'file:./mccartney-dev.db' },
+        })
+      : postgresAdapter({
+          pool: { connectionString: process.env.DATABASE_URI ?? '' },
+        }),
   secret: process.env.PAYLOAD_SECRET ?? '',
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },
   sharp,
