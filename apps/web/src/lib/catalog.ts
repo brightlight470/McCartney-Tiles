@@ -132,3 +132,29 @@ export async function getFaqs(): Promise<Faq[]> {
 export async function getTestimonials(): Promise<Testimonial[]> {
   return cmsList<Testimonial>('/api/testimonials?limit=100&sort=-date')
 }
+
+export interface StockSummary {
+  inStock: boolean
+  status: string | null
+  totalM2: number | null
+}
+
+interface StockRow {
+  status?: string | null
+  m2?: number | null
+}
+
+/** Public availability for a product (no price). Aggregates batch rows. */
+export async function getStockForProduct(productId: string | number): Promise<StockSummary> {
+  const rows = await cmsList<StockRow>(
+    `/api/stock?where[product][equals]=${productId}&limit=500&depth=0`,
+  )
+  if (rows.length === 0) return { inStock: false, status: null, totalM2: null }
+  const inStock = rows.some((r) => r.status === 'in_stock')
+  const totalM2 = rows.reduce((sum, r) => sum + (r.m2 ?? 0), 0)
+  return {
+    inStock,
+    status: inStock ? 'in_stock' : (rows[0]?.status ?? null),
+    totalM2: Number.isFinite(totalM2) ? Math.round(totalM2 * 100) / 100 : null,
+  }
+}

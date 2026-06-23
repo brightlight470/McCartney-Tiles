@@ -16,17 +16,22 @@ export function SiteHeader() {
         <Link href="/" aria-label="McCartney Tiles home">
           <Logo className="h-9 w-auto" />
         </Link>
-        <nav aria-label="Primary" className="hidden gap-8 md:flex">
-          {NAV.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-sm font-medium text-ink hover:text-brand-blue"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <div className="hidden items-center gap-8 md:flex">
+          <nav aria-label="Primary" className="flex gap-8">
+            {NAV.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-sm font-medium text-ink hover:text-brand-blue"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <Link href="/account" className="text-sm font-medium text-brand-blue hover:text-ink">
+            Account
+          </Link>
+        </div>
       </Container>
     </header>
   )

@@ -1,13 +1,25 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { Container } from '@mccartney/ui'
+import { Container, StockBadge, type StockStatus } from '@mccartney/ui'
 import { labelFor } from '@mccartney/db'
 import { SiteHeader } from '@/components/SiteHeader'
 import { SiteFooter } from '@/components/SiteFooter'
 import { RoomvoVisualiser } from '@/components/RoomvoVisualiser'
 import { JsonLd } from '@/components/JsonLd'
-import { getProductBySlug, type Product, type Range } from '@/lib/catalog'
+import { getProductBySlug, getStockForProduct, type Product, type Range } from '@/lib/catalog'
+import { getCurrentUser, getProductPrice } from '@/lib/auth'
+
+const VALID_STATUS: ReadonlySet<string> = new Set<StockStatus>([
+  'in_stock',
+  'out_of_stock',
+  'on_order',
+  'special_offer',
+  'clearance',
+])
+
+const money = (n: number, currency: string) =>
+  new Intl.NumberFormat('en-IE', { style: 'currency', currency }).format(n)
 
 export const dynamic = 'force-dynamic'
 
@@ -56,6 +68,15 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const range = rangeOf(product)
   const rows = specRows(product)
 
+  const [user, price, stock] = await Promise.all([
+    getCurrentUser(),
+    getProductPrice(product.id),
+    getStockForProduct(product.id),
+  ])
+  const canSeePrice = user?.role === 'trade' || user?.role === 'staff'
+  const stockStatus =
+    stock.status && VALID_STATUS.has(stock.status) ? (stock.status as StockStatus) : null
+
   const productLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -92,6 +113,65 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
             <div>
               <h1 className="text-3xl font-bold tracking-tight text-ink">{product.name}</h1>
+
+              <div className="mt-4 flex flex-wrap items-center gap-3">
+                {stockStatus ? <StockBadge status={stockStatus} /> : null}
+                {stock.inStock && stock.totalM2 ? (
+                  <span className="tabular text-sm text-slate">{stock.totalM2} m² in stock</span>
+                ) : null}
+              </div>
+
+              <div className="mt-6 rounded border border-border bg-white p-4">
+                {canSeePrice ? (
+                  price && (price.retailPerM2 != null || price.tradePerM2 != null) ? (
+                    <dl className="space-y-1">
+                      {price.retailPerM2 != null ? (
+                        <div className="flex justify-between text-sm">
+                          <dt className="text-slate">Retail</dt>
+                          <dd className="tabular font-medium text-ink">
+                            {money(price.retailPerM2, price.currency)}/m²
+                          </dd>
+                        </div>
+                      ) : null}
+                      {price.tradePerM2 != null ? (
+                        <div className="flex justify-between text-sm">
+                          <dt className="text-slate">Trade</dt>
+                          <dd className="tabular font-semibold text-brand-blue">
+                            {money(price.tradePerM2, price.currency)}/m²
+                          </dd>
+                        </div>
+                      ) : null}
+                      {user?.role === 'staff' && price.costPerM2 != null ? (
+                        <div className="flex justify-between text-sm">
+                          <dt className="text-slate">Cost (staff)</dt>
+                          <dd className="tabular text-ink">
+                            {money(price.costPerM2, price.currency)}/m²
+                          </dd>
+                        </div>
+                      ) : null}
+                    </dl>
+                  ) : (
+                    <p className="text-sm text-slate">Price on request.</p>
+                  )
+                ) : (
+                  <p className="text-sm text-slate">
+                    <Link
+                      href="/account/login"
+                      className="font-medium text-brand-blue hover:underline"
+                    >
+                      Sign in
+                    </Link>{' '}
+                    to a trade account for pricing, or{' '}
+                    <Link
+                      href="/contact?type=trade-account-application"
+                      className="font-medium text-brand-blue hover:underline"
+                    >
+                      apply
+                    </Link>
+                    .
+                  </p>
+                )}
+              </div>
 
               <table className="mt-8 w-full text-sm">
                 <tbody>

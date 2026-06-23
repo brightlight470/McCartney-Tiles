@@ -3,6 +3,26 @@
 All notable changes to the McCartney Tiles Phase-1 build are recorded here.
 Versioning follows the client convention: **minor = 1.x**, **major = x.1**.
 
+## [1.3.0] — 2026-06-23
+
+### Added — auth + server-side price/stock gating
+
+- **Payload-auth sign-in** for the web app: login/logout proxy routes that forward the
+  `payload-token` cookie to the web origin, `/account/login` and `/account` pages, and a
+  role-aware header link.
+- **Price gating** on product pages enforced server-side by Payload access control — public sees
+  no price, trade sees retail + trade, staff also sees cost. The web reflects the gate; it cannot
+  bypass it (single enforcement point).
+- Public **stock availability** (status + m² in stock) on product pages.
+- Postgres + Meilisearch via **Docker** is now the running stack (WSL2 installed post-reboot);
+  SQLite remains the no-Docker fallback. Postgres host port 5434.
+- Dev helper `create:testdata` (staff/trade accounts + a price) for verification.
+
+### Verified
+
+- Price gating end-to-end: public → **403**; trade → retail £42.50 / trade £31.00, cost hidden;
+  staff → cost £24.00 visible.
+
 ## [1.2.0] — 2026-06-23
 
 ### Added — local database + live faceted search (dev infrastructure)
