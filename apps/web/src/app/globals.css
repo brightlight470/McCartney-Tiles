@@ -1,0 +1,27 @@
+@import 'tailwindcss';
+@import '@mccartney/ui/theme.css';
+
+/* Scan the design-system package so utility classes used in shared components are generated. */
+@source '../../../../packages/ui/src';
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--color-porcelain);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+}
+
+/* Tabular numerals for specification contexts (sizes, m², stock). */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}

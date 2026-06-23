@@ -1,0 +1,176 @@
+range_name,size_mm,status_raw,status,batch,tiles_per_box,m2_per_box,tiles_per_m2,boxes,loose_tiles,qty_tiles,m2
+Balti Grey,500x500,Current Stock,in_stock,03/02,4,1,4,1,2,6,1.5
+Balti Grey,500x500,Current Stock,in_stock,10/2,4,1,4,2,1,9,2.25
+Balti Grey,500x500,Current Stock,in_stock,05/02,4,1,4,16,2,66,16.5
+Balti White,500x500,Current Stock,in_stock,05/02,4,1,4,2,1,9,2.25
+Berwyn Roble Natural,85x600,Current Stock,in_stock,03/3,25,1.29,19.37984496124031,33,10,835,43.086000000000006
+Berwyn Alerce Natural,85x600,Current Stock,in_stock,02/4,25,1.29,19.37984496124031,40,,1000,51.6
+Blackwater Slate,600x600,Out of Stock,out_of_stock,OOS,4,1.44,2.7777777777777777,,,0,0
+Blackwater Slate,300x600,Current Stock,in_stock,AF6,8,1.44,5.555555555555555,6,,48,8.64
+Bloka Beige,800x800,Current Stock,in_stock,C49/7,2,1.28,1.5625,34,1,69,44.16
+Bloka Grey,800x800,Current Stock,in_stock,A50/6,2,1.28,1.5625,37,2,76,48.64
+Bloka White,800x800,Current Stock,in_stock,B49/7,2,1.28,1.5625,21,,42,26.88
+Bloka White,800x800,Current Stock,in_stock,C50/7,2,1.28,1.5625,1,1,3,1.92
+Bolshoi 01 Negro,200x200,To add to Special offer,special_offer,4/2,35,1.4,25,13,13,468,18.72
+Borage Greige,600x1200,Current Stock,in_stock,005/0,2,1.44,1.3888888888888888,7,,14,10.08
+Borage Greige,600x1200,Ordered,on_order,011/0,2,1.44,1.3888888888888888,32,,64,46.08
+Borage Natural,594x594,Current Stock,in_stock,009/1,3,1.058,2.835538752362949,33,3,102,35.972
+Clubland Grey,450x450,To add to clearance,clearance,06/C3,6,1.22,4.918032786885246,14,0,84,17.08
+Clubland Ivory,450x450,To add to clearance,clearance,04/C3,6,1.22,4.918032786885246,28,5,173,35.17666666666666
+Clubland White,450x450,To add to clearance,clearance,5/2,7,1.42,4.929577464788733,13,4,95,19.27142857142857
+Clubland White,450x450,To add to clearance,clearance,C3/02,6,1.22,4.918032786885246,11,3,69,14.03
+Cortona Avorio Honed,600x900,Current Stock,in_stock,F51/6,2,1.08,1.8518518518518516,90,,180,97.20000000000002
+Fantasia Glamora,600x1200,Current Stock,in_stock,017/0,2,1.44,1.3888888888888888,10,1,21,15.120000000000001
+Fantasia Paradise,600x1200,Current Stock,in_stock,020/0,2,1.44,1.3888888888888888,30,1,61,43.92
+Garrison Marfil Natural,800x800,Current Stock,in_stock,05/8,2,1.28,1.5625,27,1,55,35.2
+Garrison Marfil Natural,800x800,Ordered,on_order,07/8,2,1.28,1.5625,36,1,73,46.72
+Grunge Beige,600x600,Current Stock,in_stock,J49C,4,1.44,2.7777777777777777,19,,76,27.36
+Grunge White,600x600,To add to Special offer,special_offer,J49C/4,4,1.44,2.7777777777777777,4,1,17,6.12
+Icon Silver Mix,200x200,Current Stock,in_stock,VE8E,34,1.36,24.999999999999996,9,11,317,12.680000000000001
+Indicta Beige,600x600,Current Stock,in_stock,10/8,4,1.44,2.7777777777777777,3,2,14,5.04
+Indicta Multi,600x600,Current Stock,in_stock,18/8,4,1.44,2.7777777777777777,8,,32,11.52
+Indicta Multi,600x600,Current Stock,in_stock,15/8,4,1.44,2.7777777777777777,1,1,5,1.8
+Lakea Grey,300x600,Current Stock,in_stock,0O01,6,1.08,5.555555555555555,11,2,68,12.24
+Lakea Grey,300x600,Current Stock,in_stock,1M01,8,1.44,5.555555555555555,27,,216,38.88
+Lakea Grey,300x600,Current Stock,in_stock,1M01,8,1.44,5.555555555555555,40,,320,57.6
+Lakea Grey,600x600,Current Stock,in_stock,1M01,4,1.44,2.7777777777777777,2,,8,2.88
+Lakea Grey,600x600,Current Stock,in_stock,1M02,4,1.44,2.7777777777777777,9,3,39,14.040000000000001
+Lakea Grey,600x600,Current Stock,in_stock,1M06,4,1.44,2.7777777777777777,13,1,53,19.080000000000002
+Lakea Grey Décor,300x600,Current Stock,in_stock,0001,6,1.08,5.555555555555555,28,4,172,30.96
+Lakea Sand,300x600,Current Stock,in_stock,1M01,8,1.44,5.555555555555555,4,4,36,6.48
+Lakea Sand,300x600,Current Stock,in_stock,1M04,8,1.44,5.555555555555555,4,5,37,6.66
+Lakea Sand,300x600,Current Stock,in_stock,4M08,8,1.44,5.555555555555555,30,5,245,44.1
+Lakea Sand Décor NEW,300x600,Current Stock,in_stock,1M01,8,1.44,5.555555555555555,6,1,49,8.82
+Lakea Sand,600x600,Current Stock,in_stock,1M02,4,1.44,2.7777777777777777,3,2,14,5.04
+Lakea Sand,600x600,Current Stock,in_stock,1M14,4,1.44,2.7777777777777777,15,1,61,21.96
+Lakea Sand,600x600,Ordered,on_order,4M15,4,1.44,2.7777777777777777,12,,48,17.28
+Lance Cinder,600x600,Current Stock,in_stock,4M03,4,1.44,2.7777777777777777,14,1,57,20.52
+Lance Grey,600x600,Current Stock,in_stock,*005,3,1.08,2.7777777777777777,2,1,7,2.52
+Lance Grey,600x600,Current Stock,in_stock,*004,3,1.08,2.7777777777777777,1,2,5,1.8
+Lance Grey,600x600,Current Stock,in_stock,OM01/4,4,1.44,2.7777777777777777,1,1,5,1.8
+Lance Grey,600x600,Current Stock,in_stock,4M05,4,1.44,2.7777777777777777,16,2,66,23.76
+Lance Grey,600x600,Current Stock,in_stock,*002,3,1.08,2.7777777777777777,2,,6,2.16
+Lance Ivory,600x600,Current Stock,in_stock,0004/5,3,1.08,2.7777777777777777,4,2,14,5.04
+Lance Ivory,600x600,Current Stock,in_stock,4M12,4,1.44,2.7777777777777777,3,1,13,4.680000000000001
+Lance Sand,600x600,Current Stock,in_stock,4M05/1,4,1.44,2.7777777777777777,12,,48,17.28
+Lance Sand,600x600,Current Stock,in_stock,0003/3,3,1.08,2.7777777777777777,7,2,23,8.280000000000001
+Lance Sand,600x600,Current Stock,in_stock,0M01/4,4,1.44,2.7777777777777777,20,3,83,29.880000000000003
+Lakea White,600x600,Current Stock,in_stock,1M03,4,1.44,2.7777777777777777,4,,16,5.76
+Lantica Portes,600x900,Current Stock,in_stock,L50/4,3,1.62,1.8518518518518516,1,2,5,2.7
+Lantica Portes,600x900,Ordered,on_order,R49/4,3,1.62,1.8518518518518516,32,,96,51.84
+Lantica Florac,600x900,Current Stock,in_stock,M49/4,3,1.62,1.8518518518518516,24,2,74,39.96000000000001
+Lava Cinder,300x600,Current Stock,in_stock,1M01,8,1.44,5.555555555555555,8,,64,11.52
+Lava Cinder,300x600,Current Stock,in_stock,1M05,8,1.44,5.555555555555555,3,6,30,5.4
+Lava Cinder,300x600,Current Stock,in_stock,1M10,8,1.44,5.555555555555555,40,4,324,58.32
+Lava Cinder,600x600,Current Stock,in_stock,0006,3,1.06,2.830188679245283,1,1,4,1.4133333333333333
+Lava Cinder,600x600,Current Stock,in_stock,1M02,4,1.44,2.7777777777777777,32,,128,46.08
+Lava Grey,600x600,Current Stock,in_stock,1M01,4,1.44,2.7777777777777777,3,1,13,4.680000000000001
+Lava Grey,600x600,Current Stock,in_stock,1M05,4,1.44,2.7777777777777777,27,3,111,39.96
+Lava Murreto,300x600,Current Stock,in_stock,2M03,8,1.44,5.555555555555555,0,6,6,1.08
+Lava Murreto,300x600,Current Stock,in_stock,0003,6,1.08,5.555555555555555,1,3,9,1.62
+Lava Murreto,300x600,Current Stock,in_stock,0001,6,1.08,5.555555555555555,0,4,4,0.72
+Lava Murreto,300x600,Current Stock,in_stock,1M04,8,1.44,5.555555555555555,11,3,91,16.38
+Legacy Noce Chiaro Inlay,900x900,Current Stock,in_stock,50A,2,1.62,1.2345679012345678,21,,42,34.02
+Legacy Noce Chiaro Plank,200x1200,Current Stock,in_stock,48C,4,0.99,4.040404040404041,48,,192,47.519999999999996
+Lucentum Blanco,600x600,Current Stock,in_stock,46/8,4,1.44,2.7777777777777777,13,3,55,19.8
+Lucentum Arena,600x600,Current Stock,in_stock,62/8,4,1.44,2.7777777777777777,6,1,25,9
+Lucentum Arena,600x600,Current Stock,in_stock,78/8,4,1.44,2.7777777777777777,24,,96,34.56
+Lucentum Arena,600x600,Current Stock,in_stock,95/8,4,1.44,2.7777777777777777,,3,3,1.08
+Makobi Beige,333x650,Current Stock,in_stock,405/5,5,1.08,4.62962962962963,14,2,72,15.552
+Makobi Dark,333x650,Current Stock,in_stock,404/5,5,1.08,4.62962962962963,9,3,48,10.368
+Makobi Nature,333x650,Current Stock,in_stock,404/5,5,1.08,4.62962962962963,9,4,49,10.584
+Makobi White,333x650,Current Stock,in_stock,404/5,5,1.08,4.62962962962963,9,3,48,10.368
+Medella Blanco Mod,Modular,Current Stock,in_stock,M50A,,1.28,,20,,,25.6
+Medella Grigio Mod,Modular,Current Stock,in_stock,M50A,,1.28,,14.5,,,18.56
+Medella Beige Mod,Modular,Current Stock,in_stock,M50A,,1.28,,25.5,,,32.64
+Medovio Byblos,600x900,Current Stock,in_stock,48D/6,2,1.08,1.8518518518518516,3,,6,3.24
+Medovio Byblos,600x900,Current Stock,in_stock,51E/6,2,1.08,1.8518518518518516,1,1,3,1.62
+Medovio Byblos,600x900,Current Stock,in_stock,49C/8,2,1.08,1.8518518518518516,1,,2,1.08
+Medovio Décor A Blue,200x200,Current Stock,in_stock,49B/8,16,0.64,25,15,,240,9.6
+Medovio Décor B Black,200x200,Current Stock,in_stock,49B/8,16,0.64,25,21,12,348,13.92
+Medovio Décor B Black,600x900,Current Stock,in_stock,50B/6,2,1.08,1.8518518518518516,8,,16,8.64
+Medovio Ernice,600x900,Current Stock,in_stock,51C/8,2,1.08,1.8518518518518516,2,,4,2.16
+Medovio Ernice,600x900,Ordered,on_order,H52N/6,2,1.08,1.8518518518518516,48,,96,51.84
+Medovio Dor,600x900,Current Stock,in_stock,,2,1.08,1.8518518518518516,3,,6,3.24
+Medovio Menfi,600x900,Current Stock,in_stock,,2,1.08,1.8518518518518516,3,,6,3.24
+Megane Rovere,200x1200,Current Stock,in_stock,U56,6,1.44,4.166666666666667,11,4,70,16.799999999999997
+Megane Rovere,200x1200,Current Stock,in_stock,V53,6,1.44,4.166666666666667,47,,282,67.67999999999999
+Metropolis Blanco,600x600,Current Stock,in_stock,09/08,4,1.44,2.7777777777777777,3,2,14,5.04
+Metropolis Blanco,600x600,Current Stock,in_stock,18/8,4,1.44,2.7777777777777777,15,,60,21.6
+Metropolis Gris,600x600,Current Stock,in_stock,09/08,4,1.44,2.7777777777777777,13,,52,18.720000000000002
+Metropolis Pearl,600x600,Current Stock,in_stock,06/8,4,1.44,2.7777777777777777,20,,80,28.8
+Montera Light,600x900,Current Stock,in_stock,C50/4,3,1.62,1.8518518518518516,27,2,83,44.82000000000001
+Nantera Nature,600x1200,Current Stock,in_stock,003/0,2,1.44,1.3888888888888888,32,,64,46.08
+Nordic White,600x600,Current Stock,in_stock,J48F4,4,1.44,2.7777777777777777,13,3,55,19.8
+Palara Bone Natural,600x1200,Current Stock,in_stock,21/8,2,1.44,1.3888888888888888,27,,54,38.88
+Photon Musk,600x600,Current Stock,in_stock,J48D,4,1.44,2.7777777777777777,21,3,87,31.32
+Photon Perla,600x600,Current Stock,in_stock,J49C,4,1.44,2.7777777777777777,20,2,82,29.52
+Pietra Grigio Mod,Modular,Current Stock,in_stock,D150/9,,0.72,,16,,,11.52
+Pietra Grigio Mod,Modular,Current Stock,in_stock,F150/9,,0.72,,48,,,34.56
+Pietra Pepe Mod,Modular,Current Stock,in_stock,D149/9,,0.72,,2,,,1.44
+Pietra Pepe Mod,Modular,Current Stock,in_stock,B149/9,,0.72,,9,,,6.4799999999999995
+Pietra Pepe Mod,Modular,Current Stock,in_stock,E149/9,,0.72,,3,,,2.16
+Pietra Pepe Mod,Modular,Current Stock,in_stock,KI50/9,,0.72,,24,,,17.28
+Pietra Sabbia Mod,Modular,Current Stock,in_stock,H150/9,,0.72,,19,,,13.68
+Pietra Sabbia Mod,Modular,Current Stock,in_stock,II50/9,,0.72,,13,,,9.36
+Prior Wood Nogal,195x1200,Current Stock,in_stock,11/8,5,1.17,4.273504273504273,30,4,154,36.036
+R11 Black Structured,300x300,Current Stock,in_stock,7C581,14,1.26,11.11111111111111,2,1,29,2.61
+Tempra Antracite,600x600,Current Stock,in_stock,12/8,3,1.08,2.7777777777777777,1,0,3,1.08
+Tempra Carpet 1,300x600,Current Stock,in_stock,07/4,6,1.08,5.555555555555555,1,2,8,1.44
+Tempra Carpet 2,600x600,Current Stock,in_stock,12/8,4,1.44,2.7777777777777777,1,1,5,1.8
+Tempra Carpet 2,600x600,Current Stock,in_stock,18/8,4,1.44,2.7777777777777777,7,,28,10.08
+Tempra Gris,300x600,Current Stock,in_stock,18/2,6,1.08,5.555555555555555,1,3,9,1.62
+Tempra Gris,300x600,Current Stock,in_stock,35/3,6,1.08,5.555555555555555,4,,24,4.32
+Tempra Gris,600x600,Current Stock,in_stock,41/8,4,1.44,2.7777777777777777,12,0,48,17.28
+Tempra Gris,600x600,Current Stock,in_stock,38/8,4,1.44,2.7777777777777777,1,,4,1.44
+Tempra Smoke,300x600,Current Stock,in_stock,02/1,6,1.08,5.555555555555555,2,5,17,3.06
+Tempra Smoke,300x600,Current Stock,in_stock,23/5,6,1.08,5.555555555555555,3,,18,3.24
+Tempra Smoke,300x600,Current Stock,in_stock,12/4,6,1.08,5.555555555555555,2,4,16,2.88
+Tempra Smoke,300x600,Current Stock,in_stock,02/3,6,1.08,5.555555555555555,1,4,10,1.8
+Tempra Smoke,300x600,Current Stock,in_stock,67/1,6,1.08,5.555555555555555,27,1,163,29.34
+Tempra Canyon Gris,300x600,Current Stock,in_stock,04/2,6,1.08,5.555555555555555,1,4,10,1.8
+Tempra Canyon Gris,300x600,Current Stock,in_stock,01/3,6,1.08,5.555555555555555,1,1,7,1.26
+Tempra Canyon Gris,300x600,Current Stock,in_stock,07/4,6,1.08,5.555555555555555,1,,6,1.08
+Tempra Canyon Smoke,300x600,Current Stock,in_stock,05/4,6,1.08,5.555555555555555,2,4,16,2.88
+Tempra Canyon Smoke,300x600,Current Stock,in_stock,06/2,6,1.08,5.555555555555555,10,,60,10.8
+Tempra Smoke,600x600,Current Stock,in_stock,57/8,4,1.44,2.7777777777777777,17,1,69,24.84
+Tempra Smoke,600x600,Current Stock,in_stock,10/8,3,1.08,2.7777777777777777,2,1,7,2.52
+Tempra Smoke,600x600,Current Stock,in_stock,54/8,4,1.44,2.7777777777777777,4,1,17,6.12
+Tempra Smoke,600x600,Current Stock,in_stock,14/8,3,1.08,2.7777777777777777,3,1,10,3.6
+Tercio Blanco,600x1198,Current Stock,in_stock,J51B,2,1.44,1.3888888888888888,18,1,37,26.64
+Tercio Terrazo Beige,600x1198,Current Stock,in_stock,J48B,2,1.44,1.3888888888888888,14,,28,20.16
+Tercio Terrazo Grigio,600x1198,Current Stock,in_stock,J47E,2,1.44,1.3888888888888888,42,,84,60.480000000000004
+Timeless Beige Mod-4D,Modular,Current Stock,in_stock,58T/2,,1.19,,7.75,,,9.2225
+Timeless Grey,500x1000,Current Stock,in_stock,F55/5,3,1.5,2,2,2,8,4
+Timeless Grey,500x1000,Current Stock,in_stock,N55/3,4,2,2,5,2,22,11
+Timeless Grey Mod-3A,Modular,Current Stock,in_stock,55L / 2,,1.05,,16,,,16.8
+Timeless Grey Mod-3A,Modular,Current Stock,in_stock,55G / 3,,1.05,,16,,,16.8
+Timeless Grey Mod-3A,Modular,Current Stock,in_stock,E55 / 5,,1.05,,8.5,,,8.925
+Timeless Grey Mod-3A,Modular,Current Stock,in_stock,55H / 3,,1.05,,5,,,5.25
+Timeless Grey Mod-4D,Modular,Current Stock,in_stock,L55/4,,1.19,,2,,,2.38
+Timeless Grey Mod-4D,Modular,Current Stock,in_stock,55T/3,,1.19,,1,,,1.19
+Toddy Blanco,450x450,Current Stock,in_stock,N1/3,5,1.01,4.9504950495049505,2,,10,2.02
+Toddy Blanco,450x450,Current Stock,in_stock,33/2,5,1.01,4.9504950495049505,1,4,9,1.818
+Toddy Blanco,450x450,Current Stock,in_stock,T52,5,1.01,4.9504950495049505,,3,3,0.606
+Toddy Blanco,450x450,Current Stock,in_stock,32/2,5,1.01,4.9504950495049505,8,3,43,8.686
+Toddy Natural,450x450,Current Stock,in_stock,3/3,5,1.01,4.9504950495049505,2,,10,2.02
+Toddy Natural,450x450,Current Stock,in_stock,3/4,5,1.01,4.9504950495049505,1,,5,1.01
+Toddy Natural,450x450,Current Stock,in_stock,50/3,5,1.01,4.9504950495049505,4,2,22,4.444
+Trust Beige Nat,600x600,Current Stock,in_stock,J48/N4A,4,1.44,2.7777777777777777,18,,72,25.92
+Trust Beige Nat,600x600,Current Stock,in_stock,J51G/4,4,1.44,2.7777777777777777,1,3,7,2.52
+Trust Beige Nat,600x600,Current Stock,in_stock,J48I/4,4,1.44,2.7777777777777777,4,0,16,5.76
+Trust Grey Strip,300x600,Current Stock,in_stock,F48B/DA4,7,1.26,5.555555555555555,4,5,33,5.94
+Trust Grey Strip,300x600,Current Stock,in_stock,,7,1.26,5.555555555555555,,5,5,0.9
+Trust Grey Nat,600x600,Current Stock,in_stock,J49S/4,4,1.44,2.7777777777777777,12,2,50,18
+Trust Grey Nat,600x600,Current Stock,in_stock,J49I/4,4,1.44,2.7777777777777777,1,3,7,2.52
+Trust Grey Nat,600x600,Current Stock,in_stock,J51M/4,4,1.44,2.7777777777777777,3,1,13,4.680000000000001
+Trust Silver Nat,300x600,Current Stock,in_stock,F48I,8,1.44,5.555555555555555,4,5,37,6.66
+Trust Silver Nat,600x600,Current Stock,in_stock,J51N4,4,1.44,2.7777777777777777,1,,4,1.44
+Trust Silver Nat,600x600,Current Stock,in_stock,48L/4,4,1.44,2.7777777777777777,,3,3,1.08
+Trust Silver Nat,600x600,Current Stock,in_stock,J49I4,4,1.44,2.7777777777777777,3,,12,4.32
+Trust Silver Nat,600x600,Current Stock,in_stock,J47U,4,1.44,2.7777777777777777,10,2,42,15.120000000000001
+Trust White Nat,600x600,Current Stock,in_stock,J49F,4,1.44,2.7777777777777777,8,2,34,12.24
+Trust White Nat,600x600,Current Stock,in_stock,J51G,4,1.44,2.7777777777777777,32,,128,46.08
+Woodsy Blonde,200x1200,Current Stock,in_stock,B54,6,1.44,4.166666666666667,17,1,103,24.72
+Yuko Beige,600x600,Current Stock,in_stock,08/8,4,1.44,2.7777777777777777,9,4,40,14.4
+Yuko Blanco,600x600,Current Stock,in_stock,08/8,4,1.44,2.7777777777777777,32,2,130,46.800000000000004

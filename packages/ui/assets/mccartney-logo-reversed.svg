@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1480 260" role="img" aria-label="McCartney Tiles">
+  <title>McCartney Tiles (reversed)</title>
+  <g transform="translate(0,24)">
+    <rect x="0"   y="0"   width="100" height="100" fill="#23349D"/>
+    <rect x="112" y="0"   width="100" height="100" fill="#23349D"/>
+    <rect x="224" y="0"   width="100" height="100" fill="#23349D"/>
+    <rect x="336" y="0"   width="100" height="100" fill="#23349D"/>
+    <polygon points="112,0 212,0 212,100" fill="#FAE351"/>
+    <polygon points="324,0 224,0 224,100" fill="#FAE351"/>
+    <rect x="0"   y="112" width="100" height="100" fill="#23349D"/>
+    <rect x="112" y="112" width="100" height="100" fill="#FAE351"/>
+    <rect x="224" y="112" width="100" height="100" fill="#FAE351"/>
+    <rect x="336" y="112" width="100" height="100" fill="#23349D"/>
+  </g>
+  <text x="516" y="150" font-family="'Trebuchet MS','Segoe UI',Arial,sans-serif" font-weight="700" font-size="132" fill="#FFFFFF" letter-spacing="-2">McCartney</text>
+  <text x="520" y="232" font-family="'Trebuchet MS','Segoe UI',Arial,sans-serif" font-weight="700" font-size="72" fill="#C7D0E6" letter-spacing="34">TILES</text>
+</svg>

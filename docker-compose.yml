@@ -1,0 +1,36 @@
+# Local dev services for McCartney Tiles. Not for production.
+# Usage: pnpm db:up  (requires Docker Desktop). Brings up Postgres + Meilisearch.
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: mccartney-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: mccartney
+      POSTGRES_PASSWORD: mccartney
+      POSTGRES_DB: mccartney
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U mccartney']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  meilisearch:
+    image: getmeili/meilisearch:v1.12
+    container_name: mccartney-meilisearch
+    restart: unless-stopped
+    environment:
+      MEILI_MASTER_KEY: masterKey-local-dev-only
+      MEILI_ENV: development
+    ports:
+      - '7700:7700'
+    volumes:
+      - meilidata:/meili_data
+
+volumes:
+  pgdata:
+  meilidata:

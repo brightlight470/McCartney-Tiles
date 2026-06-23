@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-audit:
+    name: Install · Typecheck · Build · Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Build (web)
+        run: pnpm build:web
+        env:
+          # Build must not require live services; values are dummy for static build.
+          DATABASE_URI: postgresql://user:pass@localhost:5432/db
+          PAYLOAD_SECRET: ci-dummy-secret
+          CRM_DRIVER: mock
+
+      - name: Dependency audit (High/Critical gate)
+        run: pnpm audit --audit-level high
+
+  lighthouse:
+    name: Lighthouse CI (audit gate)
+    runs-on: ubuntu-latest
+    needs: build-and-audit
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - name: Install
+        run: pnpm install --frozen-lockfile
+      - name: Lighthouse CI
+        run: npx --yes @lhci/cli@0.14.x autorun --config=./lighthouserc.json
+        env:
+          CRM_DRIVER: mock
+        continue-on-error: true # TODO(sprint-1): flip to false once pages exist and budgets are met

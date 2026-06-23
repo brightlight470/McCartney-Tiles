@@ -1,0 +1,39 @@
+{
+  "name": "mccartney",
+  "private": true,
+  "version": "1.0.0",
+  "description": "McCartney Tiles — Phase 1 website + PIM + CRM monorepo",
+  "packageManager": "pnpm@10.33.1",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @mccartney/web dev",
+    "dev:cms": "pnpm --filter @mccartney/cms dev",
+    "build": "pnpm -r --workspace-concurrency=1 build",
+    "build:web": "pnpm --filter @mccartney/web build",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "migrate": "pnpm --filter @mccartney/cms migrate",
+    "seed": "pnpm --filter @mccartney/cms seed",
+    "audit": "pnpm audit --audit-level high"
+  },
+  "devDependencies": {
+    "prettier": "^3.4.2",
+    "typescript": "^5.9.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ],
+    "overrides": {
+      "undici": ">=7.28.0"
+    }
+  }
+}

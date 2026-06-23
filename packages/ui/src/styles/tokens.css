@@ -1,0 +1,37 @@
+/* McCartney Tiles — brand design tokens (LOCKED from logo, 23 Jun 2026).
+   Single source of truth for brand colour. No hex literals belong anywhere else. */
+:root {
+  /* Brand — sampled from logo pixels */
+  --mc-blue: #23349d; /* primary brand: emblem, headings, CTAs */
+  --mc-yellow: #fae351; /* accent: emblem + sparing highlights */
+
+  /* Supporting neutrals */
+  --mc-ink: #14215c; /* deep indigo — body & titles */
+  --mc-slate: #6b7280; /* labels, captions */
+  --mc-mist: #e7eaf1; /* card & band fills */
+  --mc-porcelain: #f6f7f9; /* dominant page surface */
+  --mc-white: #ffffff;
+  --mc-border: #dde2ec;
+
+  /* Semantic aliases */
+  --color-bg: var(--mc-porcelain);
+  --color-surface: var(--mc-white);
+  --color-text: var(--mc-ink);
+  --color-muted: var(--mc-slate);
+  --color-primary: var(--mc-blue);
+  --color-accent: var(--mc-yellow);
+  --color-border: var(--mc-border);
+
+  /* Stock status */
+  --status-in-stock: #1e7f4f;
+  --status-out-of-stock: #b23b3b;
+  --status-on-order: #b7791f;
+
+  /* Shape */
+  --radius: 14px;
+  --radius-sm: 8px;
+
+  /* Type (confirm web-font licence at brand stage; Arial fallback) */
+  --font-display: 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
+  --font-body: 'Segoe UI', Arial, sans-serif;
+}

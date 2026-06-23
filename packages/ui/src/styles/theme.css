@@ -1,0 +1,22 @@
+/* Tailwind v4 theme mapping for McCartney Tiles brand tokens.
+   Apps import this after `@import "tailwindcss"` so utilities like
+   `bg-brand-blue`, `text-ink`, `rounded` resolve to the locked brand palette. */
+@theme {
+  --color-brand-blue: #23349d;
+  --color-brand-yellow: #fae351;
+  --color-ink: #14215c;
+  --color-slate: #6b7280;
+  --color-mist: #e7eaf1;
+  --color-porcelain: #f6f7f9;
+  --color-border: #dde2ec;
+
+  --color-status-in-stock: #1e7f4f;
+  --color-status-out-of-stock: #b23b3b;
+  --color-status-on-order: #b7791f;
+
+  --radius-sm: 8px;
+  --radius: 14px;
+
+  --font-display: 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
+  --font-body: 'Segoe UI', Arial, sans-serif;
+}

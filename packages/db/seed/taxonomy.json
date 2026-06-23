@@ -1,0 +1,115 @@
+{
+  "$comment": "McCartney Tiles canonical taxonomy / search facets. Derived from the current site's Tile Viewer (well-curated) + the stock seed. Use to drive PIM fields and the faceted search index.",
+  "application": [
+    { "slug": "floor", "label": "Floor" },
+    { "slug": "wall", "label": "Wall" },
+    { "slug": "wall-floor", "label": "Wall & Floor" },
+    { "slug": "outdoor", "label": "Outdoor / Technical" },
+    { "slug": "mosaic", "label": "Mosaic Pieces" },
+    { "slug": "special-pieces", "label": "Special Pieces" }
+  ],
+  "material": [
+    { "slug": "porcelain", "label": "Porcelain" },
+    { "slug": "ceramic", "label": "Ceramic" },
+    { "slug": "natural-stone", "label": "Natural Stone" }
+  ],
+  "colourGroup": [
+    { "slug": "black", "label": "Black, Nero & Ebano" },
+    { "slug": "charcoal", "label": "Charcoal & Anthracite" },
+    { "slug": "grey", "label": "Grigio, Gris & Grey" },
+    { "slug": "white", "label": "Blanco, White & Perla" },
+    { "slug": "cream", "label": "Marfil, Cream & Lt. Beige" },
+    { "slug": "beige", "label": "Caramel, Tan & Beige" },
+    { "slug": "brown", "label": "Walnut, Taupe & Brown" },
+    { "slug": "pink", "label": "Pink & Rose" },
+    { "slug": "red", "label": "Red, Cherry & Terracotta" },
+    { "slug": "orange", "label": "Orange & Coral" },
+    { "slug": "yellow", "label": "Golden Oak & Yellow" },
+    { "slug": "green", "label": "Green, Mint & Sage" },
+    { "slug": "teal", "label": "Teal & Turquoise" },
+    { "slug": "light-blue", "label": "Light Blue" },
+    { "slug": "blue", "label": "Blue & Navy" },
+    { "slug": "purple", "label": "Plum, Mauve & Purple" },
+    { "slug": "multi", "label": "Multi-Coloured" },
+    { "slug": "copper", "label": "Copper" },
+    { "slug": "gold", "label": "Gold" },
+    { "slug": "silver", "label": "Silver" },
+    { "slug": "iron", "label": "Iron & Steel" },
+    { "slug": "oxidised", "label": "Oxidised" }
+  ],
+  "effect": [
+    { "slug": "wood", "label": "Wood Effect" },
+    { "slug": "stone", "label": "Stone Effect" },
+    { "slug": "marble", "label": "Marble Effect" },
+    { "slug": "concrete", "label": "Concrete Effect" },
+    { "slug": "slate", "label": "Slate Effect" },
+    { "slug": "metallic", "label": "Metallic Effect" },
+    { "slug": "patterned", "label": "Patterns & Textures" },
+    { "slug": "victorian", "label": "Victorian" },
+    { "slug": "plain", "label": "Plain / Solid" }
+  ],
+  "design": [
+    { "slug": "floral", "label": "Floral" },
+    { "slug": "terrazzo", "label": "Terrazzo" },
+    { "slug": "travertine", "label": "Travertine" },
+    { "slug": "weathered", "label": "Weathered" },
+    { "slug": "vintage", "label": "Vintage" },
+    { "slug": "encaustic", "label": "Encaustic" },
+    { "slug": "rustic", "label": "Rustic" }
+  ],
+  "finish": [
+    { "slug": "natural", "label": "Natural / Matt", "synonyms": ["matt", "matte"] },
+    {
+      "slug": "lappato",
+      "label": "Lappato / Semi-polished",
+      "synonyms": ["honed", "semi-polished"]
+    },
+    { "slug": "gloss", "label": "Glossy / Polished", "synonyms": ["polished", "brillo"] },
+    { "slug": "anti-slip", "label": "Anti-slip", "synonyms": ["grip", "R10", "R11"] }
+  ],
+  "edge": [
+    { "slug": "rectified", "label": "Rectified" },
+    { "slug": "pressed", "label": "Pressed / Cushion" },
+    { "slug": "chiselled", "label": "Chiselled" }
+  ],
+  "format": [
+    { "slug": "hexagonal", "label": "Hexagonal" },
+    { "slug": "brick-effect", "label": "Brick Effect" },
+    { "slug": "brick-slips", "label": "Brick Slips" },
+    { "slug": "pre-boxed-modular", "label": "Pre-boxed Modular" },
+    { "slug": "miscellaneous", "label": "Miscellaneous" }
+  ],
+  "sizeBand": [
+    { "slug": "small", "label": "Small format" },
+    { "slug": "medium", "label": "Medium format" },
+    { "slug": "large", "label": "Large format" },
+    { "slug": "xl", "label": "X-Large format" }
+  ],
+  "sizesFloorSeed_mm": [
+    "85x600",
+    "195x1200",
+    "200x200",
+    "200x1200",
+    "300x300",
+    "300x600",
+    "333x650",
+    "450x450",
+    "500x500",
+    "500x1000",
+    "594x594",
+    "600x600",
+    "600x900",
+    "600x1198",
+    "600x1200",
+    "800x800",
+    "900x900",
+    "Modular"
+  ],
+  "stockStatus": [
+    { "slug": "in_stock", "label": "In stock", "raw": "Current Stock" },
+    { "slug": "out_of_stock", "label": "Out of stock", "raw": "Out of Stock" },
+    { "slug": "on_order", "label": "On order", "raw": "Ordered" },
+    { "slug": "special_offer", "label": "Special offer", "raw": "To add to Special offer" },
+    { "slug": "clearance", "label": "Clearance", "raw": "To add to clearance" }
+  ]
+}

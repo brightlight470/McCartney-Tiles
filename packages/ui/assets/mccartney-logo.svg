@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1480 260" role="img" aria-label="McCartney Tiles">
+  <title>McCartney Tiles</title>
+  <!-- Emblem: 4x2 tile grid, blue corners, yellow downward triangle over centre, solid yellow beneath -->
+  <g transform="translate(0,24)">
+    <!-- top row -->
+    <rect x="0"   y="0"   width="100" height="100" fill="#23349D"/>
+    <rect x="112" y="0"   width="100" height="100" fill="#23349D"/>
+    <rect x="224" y="0"   width="100" height="100" fill="#23349D"/>
+    <rect x="336" y="0"   width="100" height="100" fill="#23349D"/>
+    <!-- yellow downward triangle halves over the two centre-top tiles -->
+    <polygon points="112,0 212,0 212,100" fill="#FAE351"/>
+    <polygon points="324,0 224,0 224,100" fill="#FAE351"/>
+    <!-- bottom row -->
+    <rect x="0"   y="112" width="100" height="100" fill="#23349D"/>
+    <rect x="112" y="112" width="100" height="100" fill="#FAE351"/>
+    <rect x="224" y="112" width="100" height="100" fill="#FAE351"/>
+    <rect x="336" y="112" width="100" height="100" fill="#23349D"/>
+  </g>
+  <!-- Wordmark (recreation — production master to be autotraced from original by Claude Code) -->
+  <text x="516" y="150" font-family="'Trebuchet MS','Segoe UI',Arial,sans-serif" font-weight="700" font-size="132" fill="#23349D" letter-spacing="-2">McCartney</text>
+  <text x="520" y="232" font-family="'Trebuchet MS','Segoe UI',Arial,sans-serif" font-weight="700" font-size="72" fill="#6B7280" letter-spacing="34">TILES</text>
+</svg>

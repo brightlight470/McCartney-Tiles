@@ -1,0 +1,9 @@
+node_modules
+.next
+dist
+build
+out
+coverage
+pnpm-lock.yaml
+**/payload-types.ts
+packages/db/seed/seed-floors.csv

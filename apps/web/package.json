@@ -1,0 +1,30 @@
+{
+  "name": "@mccartney/web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit",
+    "test": "echo \"(web) no unit tests yet\""
+  },
+  "dependencies": {
+    "@mccartney/crm": "workspace:*",
+    "@mccartney/search": "workspace:*",
+    "@mccartney/ui": "workspace:*",
+    "next": "16.2.9",
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.1",
+    "@types/node": "^26.0.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "tailwindcss": "^4.3.1",
+    "typescript": "^5.9.3"
+  }
+}
