@@ -7,3 +7,4 @@ coverage
 pnpm-lock.yaml
 **/payload-types.ts
 packages/db/seed/seed-floors.csv
+packages/db/seed/image-manifest.json

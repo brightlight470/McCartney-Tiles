@@ -1,34 +1,15 @@
 import Link from 'next/link'
-import { Container, Logo } from '@mccartney/ui'
-
-const NAV = [
-  { label: 'Ranges', href: '/ranges' },
-  { label: 'Showrooms', href: '/showrooms' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
-]
+import { Container } from '@mccartney/ui'
+import { SiteHeader } from '@/components/SiteHeader'
+import { SiteFooter } from '@/components/SiteFooter'
+import { JsonLd, LOCAL_BUSINESS_LD, ORGANISATION_LD } from '@/components/JsonLd'
 
 export default function HomePage() {
   return (
     <>
-      <header className="border-b border-border">
-        <Container className="flex h-20 items-center justify-between">
-          <Link href="/" aria-label="McCartney Tiles home">
-            <Logo className="h-9 w-auto" />
-          </Link>
-          <nav aria-label="Primary" className="hidden gap-8 md:flex">
-            {NAV.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-sm font-medium text-ink hover:text-brand-blue"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        </Container>
-      </header>
+      <JsonLd data={ORGANISATION_LD} />
+      <JsonLd data={LOCAL_BUSINESS_LD} />
+      <SiteHeader />
 
       <main>
         <section className="py-24 sm:py-32">
@@ -61,11 +42,7 @@ export default function HomePage() {
         </section>
       </main>
 
-      <footer className="border-t border-border py-10">
-        <Container className="text-sm text-slate">
-          <p>&copy; {new Date().getFullYear()} McCartney Tiles. Randalstown, Co. Antrim.</p>
-        </Container>
-      </footer>
+      <SiteFooter />
     </>
   )
 }

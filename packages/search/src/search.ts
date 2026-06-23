@@ -24,7 +24,11 @@ function buildFilter(filters: SearchParams['filters']): string[] {
   const clauses: string[] = []
   for (const [attr, values] of Object.entries(filters)) {
     if (!values || values.length === 0) continue
-    const ors = values.map((v) => `${attr} = ${JSON.stringify(v)}`)
+    const ors = values.map((v) => {
+      // Booleans (e.g. inStock) must be emitted unquoted for Meilisearch.
+      const literal = v === 'true' || v === 'false' ? v : JSON.stringify(v)
+      return `${attr} = ${literal}`
+    })
     clauses.push(`(${ors.join(' OR ')})`)
   }
   return clauses

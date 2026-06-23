@@ -3,6 +3,30 @@
 All notable changes to the McCartney Tiles Phase-1 build are recorded here.
 Versioning follows the client convention: **minor = 1.x**, **major = x.1**.
 
+## [1.1.0] — 2026-06-23
+
+### Added — Sprint 1 (public spine; DB-independent slice)
+
+- Catalogue data layer over the Payload REST API with graceful fallback; shared site header/footer.
+- **Faceted search** at `/ranges` — server-rendered, URL-synced facet sidebar (works without JS),
+  keyword search, sort, pagination, active-filter chips; degrades to an empty state when
+  Meilisearch is not yet running.
+- Range (`/ranges/[slug]`) and product (`/product/[slug]`) pages with spec tables (tabular
+  numerals), breadcrumb, Product JSON-LD, and sample/enquiry CTAs.
+- Roomvo visualiser integration point (feature-flagged off until keyed).
+- Content pages: showrooms (LocalBusiness JSON-LD), about/heritage, projects, FAQ (FAQPage
+  JSON-LD), contact.
+- `EnquiryForm` (contact / brochure / showroom visit / trade application / sample request) posting
+  to `/api/forms` through the mock CRM, with honeypot.
+- Organization + LocalBusiness JSON-LD on the home page.
+- Image-crawl tool (`scripts/crawl-images.mjs`) + generated `packages/db/seed/image-manifest.json`
+  — 2,633 images and 2,735 internal links inventoried from the legacy site for migration.
+- search package: boolean-safe Meilisearch filter (e.g. `inStock`).
+
+### Notes
+
+- Auth/portals, the ingestion review UI, and the live DB seed remain gated on Docker/Postgres.
+
 ## [1.0.0] — 2026-06-23
 
 ### Added — Sprint 0 foundation

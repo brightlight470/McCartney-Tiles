@@ -1,7 +1,7 @@
 {
   "name": "mccartney",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "McCartney Tiles — Phase 1 website + PIM + CRM monorepo",
   "packageManager": "pnpm@10.33.1",
   "engines": {
@@ -21,6 +21,7 @@
     "db:down": "docker compose down",
     "migrate": "pnpm --filter @mccartney/cms migrate",
     "seed": "pnpm --filter @mccartney/cms seed",
+    "crawl:images": "node scripts/crawl-images.mjs",
     "audit": "pnpm audit --audit-level high"
   },
   "devDependencies": {

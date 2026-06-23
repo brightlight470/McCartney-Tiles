@@ -72,6 +72,9 @@ importers:
       '@mccartney/crm':
         specifier: workspace:*
         version: link:../../packages/crm
+      '@mccartney/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       '@mccartney/search':
         specifier: workspace:*
         version: link:../../packages/search

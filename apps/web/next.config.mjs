@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['@mccartney/ui', '@mccartney/crm', '@mccartney/search'],
+  transpilePackages: ['@mccartney/ui', '@mccartney/crm', '@mccartney/search', '@mccartney/db'],
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
