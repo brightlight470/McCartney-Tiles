@@ -17,6 +17,7 @@ import { Testimonials } from './collections/Testimonials'
 import { Projects } from './collections/Projects'
 import { Faqs } from './collections/Faqs'
 import { Showrooms } from './collections/Showrooms'
+import { ingestPublishEndpoint } from './endpoints/ingest-publish'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -40,6 +41,7 @@ export default buildConfig({
     Faqs,
     Showrooms,
   ],
+  endpoints: [ingestPublishEndpoint],
   editor: lexicalEditor(),
   // Postgres is the production/default adapter. DATABASE_ADAPTER=sqlite selects a
   // local file DB for development on machines without Docker/Postgres (no schema/prod change).

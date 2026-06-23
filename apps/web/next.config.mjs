@@ -2,7 +2,13 @@ import { legacyRedirects } from './redirects.mjs'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['@mccartney/ui', '@mccartney/crm', '@mccartney/search', '@mccartney/db'],
+  transpilePackages: [
+    '@mccartney/ui',
+    '@mccartney/crm',
+    '@mccartney/search',
+    '@mccartney/db',
+    '@mccartney/ingestion',
+  ],
   async redirects() {
     return legacyRedirects()
   },

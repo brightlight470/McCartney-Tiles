@@ -81,6 +81,9 @@ importers:
       '@mccartney/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@mccartney/ingestion':
+        specifier: workspace:*
+        version: link:../../packages/ingestion
       '@mccartney/search':
         specifier: workspace:*
         version: link:../../packages/search

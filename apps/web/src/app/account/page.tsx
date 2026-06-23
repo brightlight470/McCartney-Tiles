@@ -61,12 +61,20 @@ export default async function AccountPage() {
               <div className="flex items-center gap-4">
                 <LogoutButton />
                 {user.role === 'staff' ? (
-                  <a
-                    href={`${CMS_URL}/admin`}
-                    className="text-sm font-medium text-brand-blue hover:underline"
-                  >
-                    Open the admin
-                  </a>
+                  <>
+                    <Link
+                      href="/staff/ingest"
+                      className="text-sm font-medium text-brand-blue hover:underline"
+                    >
+                      Ingest catalogue
+                    </Link>
+                    <a
+                      href={`${CMS_URL}/admin`}
+                      className="text-sm font-medium text-brand-blue hover:underline"
+                    >
+                      Open the admin
+                    </a>
+                  </>
                 ) : null}
               </div>
             </div>
