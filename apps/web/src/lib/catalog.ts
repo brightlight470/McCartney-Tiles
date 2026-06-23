@@ -51,7 +51,8 @@ export interface Showroom {
   address: string
   postcode?: string | null
   hours?: string | null
-  location?: [number, number] | null
+  lat?: number | null
+  lng?: number | null
 }
 
 export interface Project {

@@ -10,6 +10,7 @@ export const Showrooms: CollectionConfig = {
     { name: 'address', type: 'textarea', required: true },
     { name: 'postcode', type: 'text' },
     { name: 'hours', type: 'textarea' },
-    { name: 'location', type: 'point', label: 'Geo (lng, lat)' },
+    { name: 'lat', type: 'number', admin: { description: 'Latitude' } },
+    { name: 'lng', type: 'number', admin: { description: 'Longitude' } },
   ],
 }
