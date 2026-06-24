@@ -3,6 +3,25 @@
 All notable changes to the McCartney Tiles Phase-1 build are recorded here.
 Versioning follows the client convention: **minor = 1.x**, **major = x.1**.
 
+## [1.5.0] — 2026-06-24
+
+### Added — pre-launch hardening
+
+- Web unit tests (vitest): faceted-search params/toggle/active-filters, legacy redirect map, region
+  capability gating (12 tests; 28 across the workspace).
+- **Content-Security-Policy** + security headers, verified live on responses.
+
+### Fixed — accessibility (WCAG 2.1 AA)
+
+- Facet filter links carried `aria-pressed` (invalid on links) → `aria-current`.
+- Stock-badge label contrast raised to ≥4.5:1 (darker text on the status tint).
+- Logo home-link accessible name now matches its content.
+
+### Verified
+
+- Lighthouse on home, `/ranges`, `/product/[slug]`: **Performance 97 · Accessibility 100 ·
+  Best-practices 96 · SEO 100** — every category clears the ≥90 gate.
+
 ## [1.4.0] — 2026-06-24
 
 ### Added

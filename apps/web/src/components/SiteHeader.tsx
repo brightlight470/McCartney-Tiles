@@ -13,8 +13,8 @@ export function SiteHeader() {
   return (
     <header className="border-b border-border bg-white">
       <Container className="flex h-20 items-center justify-between">
-        <Link href="/" aria-label="McCartney Tiles home">
-          <Logo className="h-9 w-auto" />
+        <Link href="/">
+          <Logo className="h-9 w-auto" title="McCartney Tiles home" />
         </Link>
         <div className="hidden items-center gap-8 md:flex">
           <nav aria-label="Primary" className="flex gap-8">

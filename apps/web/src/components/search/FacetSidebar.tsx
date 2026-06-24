@@ -21,7 +21,7 @@ function Option({
     <li>
       <Link
         href={href}
-        aria-pressed={active}
+        aria-current={active ? 'true' : undefined}
         className="flex items-center justify-between gap-2 rounded-sm px-2 py-1 text-sm hover:bg-mist focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:outline-none"
       >
         <span className="flex items-center gap-2">
