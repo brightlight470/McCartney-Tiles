@@ -20,3 +20,43 @@
   --font-display: 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
   --font-body: 'Segoe UI', Arial, sans-serif;
 }
+
+/* Animated logo — "the tiles set into place" (Brand Identity v1.0).
+   Static by default so SSR, no-JS and reduced-motion render the final lockup.
+   The entrance runs only once AnimatedLogo adds `.mc-anim` after hydration. */
+@keyframes mc-tile-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes mc-wm-fade {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.mc-tile {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.mc-anim .mc-tile {
+  animation: mc-tile-drop 0.55s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+.mc-anim .mc-wm {
+  animation: mc-wm-fade 0.6s ease 0.92s both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mc-anim .mc-tile,
+  .mc-anim .mc-wm {
+    animation: none;
+  }
+}

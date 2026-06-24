@@ -3,6 +3,17 @@
 All notable changes to the McCartney Tiles Phase-1 build are recorded here.
 Versioning follows the client convention: **minor = 1.x**, **major = x.1**.
 
+## [1.6.0] — 2026-06-24
+
+### Added — brand identity v1.0
+
+- **Animated logo** (`AnimatedLogo`) — the "tiles set into place" entrance from Brand Identity
+  v1.0: the eight emblem tiles drop into the 4×2 grid, then the wordmark fades in. Same geometry
+  and locked colours as the static `Logo`. Wired into the site header.
+- Static by default: the server renders the final lockup, so no-JS and search engines see the
+  complete mark. The entrance is added after hydration and plays once per page load. Suppressed
+  for `prefers-reduced-motion`. Keyframes live in the brand theme stylesheet.
+
 ## [1.5.0] — 2026-06-24
 
 ### Added — pre-launch hardening

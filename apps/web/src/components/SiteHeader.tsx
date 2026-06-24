@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Container, Logo } from '@mccartney/ui'
+import { Container, AnimatedLogo } from '@mccartney/ui'
 
 export const NAV = [
   { label: 'Ranges', href: '/ranges' },
@@ -14,7 +14,7 @@ export function SiteHeader() {
     <header className="border-b border-border bg-white">
       <Container className="flex h-20 items-center justify-between">
         <Link href="/">
-          <Logo className="h-9 w-auto" title="McCartney Tiles home" />
+          <AnimatedLogo className="h-9 w-auto" title="McCartney Tiles home" />
         </Link>
         <div className="hidden items-center gap-8 md:flex">
           <nav aria-label="Primary" className="flex gap-8">
