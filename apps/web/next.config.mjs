@@ -21,8 +21,21 @@ const nextConfig = {
     ],
   },
   async headers() {
-    // Baseline security headers (full CSP tuned at Sprint 7 hardening).
+    const csp = [
+      "default-src 'self'",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "frame-ancestors 'self'",
+      "object-src 'none'",
+      "img-src 'self' data: https://www.mccartneytiles.com https://mccartneytiles.com",
+      // Next.js requires 'unsafe-inline'/'unsafe-eval' without nonces; tighten with a nonce middleware later.
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+      "style-src 'self' 'unsafe-inline'",
+      "font-src 'self' data:",
+      "connect-src 'self'",
+    ].join('; ')
     const headers = [
+      { key: 'Content-Security-Policy', value: csp },
       { key: 'X-Content-Type-Options', value: 'nosniff' },
       { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
       { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
