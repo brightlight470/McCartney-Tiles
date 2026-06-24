@@ -17,6 +17,7 @@ import { Testimonials } from './collections/Testimonials'
 import { Projects } from './collections/Projects'
 import { Faqs } from './collections/Faqs'
 import { Showrooms } from './collections/Showrooms'
+import { Baskets } from './collections/Baskets'
 import { ingestPublishEndpoint } from './endpoints/ingest-publish'
 
 const filename = fileURLToPath(import.meta.url)
@@ -40,6 +41,7 @@ export default buildConfig({
     Projects,
     Faqs,
     Showrooms,
+    Baskets,
   ],
   endpoints: [ingestPublishEndpoint],
   editor: lexicalEditor(),

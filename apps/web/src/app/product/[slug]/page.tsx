@@ -6,6 +6,7 @@ import { labelFor } from '@mccartney/db'
 import { SiteHeader } from '@/components/SiteHeader'
 import { SiteFooter } from '@/components/SiteFooter'
 import { RoomvoVisualiser } from '@/components/RoomvoVisualiser'
+import { AddToBasketButton } from '@/components/AddToBasketButton'
 import { JsonLd } from '@/components/JsonLd'
 import { getProductBySlug, getStockForProduct, type Product, type Range } from '@/lib/catalog'
 import { getCurrentUser, getProductPrice } from '@/lib/auth'
@@ -199,6 +200,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 >
                   Make an enquiry
                 </Link>
+                {canSeePrice ? <AddToBasketButton productId={product.id} /> : null}
               </div>
 
               <div className="mt-8">

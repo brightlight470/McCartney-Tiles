@@ -3,6 +3,24 @@
 All notable changes to the McCartney Tiles Phase-1 build are recorded here.
 Versioning follows the client convention: **minor = 1.x**, **major = x.1**.
 
+## [1.4.0] — 2026-06-24
+
+### Added
+
+- **301 redirect map** from legacy WordPress URLs (category → faceted search, info → content).
+- **Staff ingestion pipeline** — `/staff/ingest`: upload/paste CSV → classifier-prefilled review
+  grid → publish (upsert ranges/products, set showOnWebsite, reindex). CMS endpoint + proxy routes,
+  all staff-gated. Verified end-to-end.
+- **Catalogue migration** — `migrate:suppliers` (11 supplier logos → Payload media + Supplier
+  records) and `migrate:taxonomy` (bootstrap product taxonomy from classifiers into the DB).
+- **Trade project baskets** — owner-gated Baskets collection; "Add to project basket" on product
+  pages; `/account/baskets` list with remove. Verified add/dedup/remove + owner isolation.
+
+### Fixed
+
+- Accounts `read`/`update` now allow self-access, so Payload `/me` works for trade users.
+  Previously trade users appeared signed-out to the web app, which also hid trade pricing.
+
 ## [1.3.0] — 2026-06-23
 
 ### Added — auth + server-side price/stock gating

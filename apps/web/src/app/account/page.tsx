@@ -58,8 +58,16 @@ export default async function AccountPage() {
                 ) : null}
               </dl>
 
-              <div className="flex items-center gap-4">
+              <div className="flex flex-wrap items-center gap-4">
                 <LogoutButton />
+                {user.role === 'trade' || user.role === 'staff' ? (
+                  <Link
+                    href="/account/baskets"
+                    className="text-sm font-medium text-brand-blue hover:underline"
+                  >
+                    Project baskets
+                  </Link>
+                ) : null}
                 {user.role === 'staff' ? (
                   <>
                     <Link
