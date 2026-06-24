@@ -13,6 +13,9 @@ out/
 apps/cms/src/payload-types.ts
 apps/web/src/payload-types.ts
 
+# Payload local media uploads (regenerable via migrate:suppliers)
+apps/cms/media/
+
 # Env / secrets
 .env
 .env.local
