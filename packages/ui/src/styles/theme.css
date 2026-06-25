@@ -54,9 +54,32 @@
 .mc-anim .mc-wm {
   animation: mc-wm-fade 0.6s ease 0.92s both;
 }
+/* Sheen sweep — runs after the tiles land and the wordmark settles. Hidden by
+   default (opacity 0) so the static lockup carries no stray highlight. */
+@keyframes mc-sheen-sweep {
+  0% {
+    transform: translateX(-400px) skewX(-16deg);
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(1900px) skewX(-16deg);
+    opacity: 0;
+  }
+}
+.mc-sheen {
+  opacity: 0;
+  transform-box: view-box;
+}
+.mc-anim .mc-sheen {
+  animation: mc-sheen-sweep 1.15s ease 1.05s both;
+}
 @media (prefers-reduced-motion: reduce) {
   .mc-anim .mc-tile,
-  .mc-anim .mc-wm {
+  .mc-anim .mc-wm,
+  .mc-anim .mc-sheen {
     animation: none;
   }
 }

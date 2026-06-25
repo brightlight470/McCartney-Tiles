@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useId, useRef } from 'react'
 
 interface AnimatedLogoProps {
   /** Reversed swaps the wordmark to light tones for dark backgrounds. */
@@ -13,8 +13,9 @@ interface AnimatedLogoProps {
 
 /**
  * McCartney Tiles lockup with the "tiles set into place" entrance (Brand
- * Identity v1.0): the eight emblem tiles drop into the grid, then the wordmark
- * fades in. Identical geometry and colours to the static {@link Logo}.
+ * Identity v1.0): the emblem tiles drop into the grid, the wordmark fades in,
+ * then a sheen sweeps across the mark. Identical geometry and colours to the
+ * static {@link Logo}.
  *
  * Static by default — the SVG renders the final lockup on the server and with
  * JavaScript disabled. The entrance is added after hydration via the `.mc-anim`
@@ -38,6 +39,11 @@ export function AnimatedLogo({
   const word = reversed ? '#ffffff' : blue
   const sub = reversed ? '#e7eaf1' : '#6b7280'
   const font = "'Trebuchet MS','Segoe UI',Arial,sans-serif"
+  // Sheen tone follows the brand file: white on light, yellow on reversed.
+  const sheen = reversed ? yellow : '#ffffff'
+  const sheenOpacity = reversed ? 0.45 : 0.55
+  // Unique gradient id so multiple lockups on one page do not collide.
+  const gradId = `mc-sheen-${useId().replace(/[:]/g, '')}`
 
   useEffect(() => {
     const svg = ref.current
@@ -58,6 +64,13 @@ export function AnimatedLogo({
       className={['mc-logo', className].filter(Boolean).join(' ')}
     >
       <title>{title}</title>
+      <defs>
+        <linearGradient id={gradId} x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor={sheen} stopOpacity="0" />
+          <stop offset="0.5" stopColor={sheen} stopOpacity={sheenOpacity} />
+          <stop offset="1" stopColor={sheen} stopOpacity="0" />
+        </linearGradient>
+      </defs>
       <g transform="translate(0,24)">
         <rect className="mc-tile" style={{ animationDelay: '0s' }} x="0" y="0" width="100" height="100" fill={blue} />
         <rect className="mc-tile" style={{ animationDelay: '.30s' }} x="112" y="0" width="100" height="100" fill={blue} />
@@ -77,6 +90,9 @@ export function AnimatedLogo({
         <text x="520" y="232" fontFamily={font} fontWeight="700" fontSize="72" fill={sub} letterSpacing="34">
           TILES
         </text>
+      </g>
+      <g className="mc-sheen">
+        <rect x="-220" y="-60" width="300" height="380" fill={`url(#${gradId})`} />
       </g>
     </svg>
   )
