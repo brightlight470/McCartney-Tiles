@@ -1,0 +1,20 @@
+# Meilisearch binary — large, not needed for web build
+tools/
+
+# CMS app not deployed here
+apps/cms/.next/
+apps/cms/media/
+
+# Local dev data
+tmp/
+.cache/
+*.local.sqlite
+*.db
+*.db-shm
+*.db-wal
+dumps/
+
+# Test artefacts
+playwright-report/
+test-results/
+coverage/
