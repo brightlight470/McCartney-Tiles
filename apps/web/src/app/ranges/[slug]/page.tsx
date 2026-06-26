@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { Container } from '@mccartney/ui'
 import { SiteHeader } from '@/components/SiteHeader'
 import { SiteFooter } from '@/components/SiteFooter'
-import { getProductsForRange, getRangeBySlug } from '@/lib/catalog'
+import { getProductsForRange, getRangeBySlug, mediaUrl } from '@/lib/catalog'
 
 export const dynamic = 'force-dynamic'
 
@@ -27,6 +27,7 @@ export default async function RangePage({ params }: { params: Promise<{ slug: st
   const range = await getRangeBySlug(slug)
   if (!range) notFound()
   const products = await getProductsForRange(range.id)
+  const hero = mediaUrl(range.heroImage, 'hero')
 
   return (
     <>
@@ -46,6 +47,13 @@ export default async function RangePage({ params }: { params: Promise<{ slug: st
             <p className="mt-4 max-w-2xl text-slate">{range.description}</p>
           ) : null}
 
+          {hero ? (
+            <div className="mt-6 aspect-[16/9] overflow-hidden rounded border border-border bg-mist">
+              {/* eslint-disable-next-line @next/next/no-img-element -- migrated remote media; next/image config lands in hardening */}
+              <img src={hero} alt={range.name} className="h-full w-full object-cover" />
+            </div>
+          ) : null}
+
           <h2 className="mt-12 font-display text-lg font-semibold text-ink">
             Products in this range
           </h2>
@@ -53,19 +61,36 @@ export default async function RangePage({ params }: { params: Promise<{ slug: st
             <p className="mt-4 text-slate">Product details are being added.</p>
           ) : (
             <ul className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4">
-              {products.map((product) => (
-                <li key={product.id}>
-                  <Link
-                    href={`/product/${product.slug}`}
-                    className="block rounded border border-border bg-white p-4 transition-colors hover:border-brand-blue focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:outline-none"
-                  >
-                    <p className="font-display font-semibold text-ink">{product.name}</p>
-                    {product.sizeMm ? (
-                      <p className="tabular mt-1 text-sm text-slate">{product.sizeMm} mm</p>
-                    ) : null}
-                  </Link>
-                </li>
-              ))}
+              {products.map((product) => {
+                const thumb =
+                  mediaUrl(product.images?.[0], 'card') ?? mediaUrl(range.heroImage, 'card')
+                return (
+                  <li key={product.id}>
+                    <Link
+                      href={`/product/${product.slug}`}
+                      className="group block overflow-hidden rounded border border-border bg-white transition-colors hover:border-brand-blue focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:outline-none"
+                    >
+                      <div className="aspect-square bg-mist">
+                        {thumb ? (
+                          // eslint-disable-next-line @next/next/no-img-element -- migrated remote media; next/image config lands in hardening
+                          <img
+                            src={thumb}
+                            alt=""
+                            loading="lazy"
+                            className="h-full w-full object-cover"
+                          />
+                        ) : null}
+                      </div>
+                      <div className="p-4">
+                        <p className="font-display font-semibold text-ink">{product.name}</p>
+                        {product.sizeMm ? (
+                          <p className="tabular mt-1 text-sm text-slate">{product.sizeMm} mm</p>
+                        ) : null}
+                      </div>
+                    </Link>
+                  </li>
+                )
+              })}
             </ul>
           )}
         </Container>

@@ -23,6 +23,13 @@ interface RangeRef {
   slug?: string
   showOnWebsite?: boolean
 }
+interface MediaSize {
+  url?: string | null
+}
+interface MediaRef {
+  url?: string | null
+  sizes?: Record<string, MediaSize | undefined>
+}
 interface ProductRow {
   id: string | number
   name: string
@@ -37,10 +44,23 @@ interface ProductRow {
   material?: string | null
   edge?: string | null
   format?: string | null
+  images?: (MediaRef | string | number)[] | null
 }
 
 const idOf = (rel: StockRow['product']): string =>
   typeof rel === 'object' ? String(rel.id) : String(rel)
+
+// Media is served by the CMS; relative Payload URLs are made absolute for the browser.
+const MEDIA_BASE =
+  process.env.CMS_URL ?? process.env.PAYLOAD_PUBLIC_SERVER_URL ?? 'http://localhost:3001'
+
+function thumbnailFor(images: ProductRow['images']): string | null {
+  const first = Array.isArray(images) ? images[0] : null
+  if (!first || typeof first !== 'object') return null
+  const rel = first.sizes?.card?.url ?? first.sizes?.thumbnail?.url ?? first.url
+  if (!rel) return null
+  return rel.startsWith('http') ? rel : `${MEDIA_BASE}${rel}`
+}
 
 function deriveStock(rows: StockRow[]): { inStock: boolean; status: string | null } {
   if (rows.length === 0) return { inStock: false, status: null }
@@ -105,6 +125,7 @@ export async function indexProductsFromDb(
       format: p.format ?? classifyFormat(p.name).value,
       inStock: stock.inStock,
       stockStatus: stock.status,
+      thumbnail: thumbnailFor(p.images),
     }
     docs.push(toProductDocument(doc))
   }

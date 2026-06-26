@@ -8,7 +8,7 @@ import { SiteFooter } from '@/components/SiteFooter'
 import { RoomvoVisualiser } from '@/components/RoomvoVisualiser'
 import { AddToBasketButton } from '@/components/AddToBasketButton'
 import { JsonLd } from '@/components/JsonLd'
-import { getProductBySlug, getStockForProduct, type Product, type Range } from '@/lib/catalog'
+import { getProductBySlug, getStockForProduct, mediaUrl, type Product, type Range } from '@/lib/catalog'
 import { getCurrentUser, getProductPrice } from '@/lib/auth'
 
 const VALID_STATUS: ReadonlySet<string> = new Set<StockStatus>([
@@ -68,6 +68,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   if (!product) notFound()
   const range = rangeOf(product)
   const rows = specRows(product)
+  const image = mediaUrl(product.images?.[0], 'card') ?? mediaUrl(range?.heroImage, 'card')
 
   const [user, price, stock] = await Promise.all([
     getCurrentUser(),
@@ -110,7 +111,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </nav>
 
           <div className="mt-6 grid grid-cols-1 gap-10 lg:grid-cols-2">
-            <div className="aspect-square rounded border border-border bg-mist" />
+            <div className="aspect-square overflow-hidden rounded border border-border bg-mist">
+              {image ? (
+                // eslint-disable-next-line @next/next/no-img-element -- migrated remote media; next/image config lands in hardening
+                <img src={image} alt={product.name} className="h-full w-full object-cover" />
+              ) : null}
+            </div>
 
             <div>
               <h1 className="text-3xl font-bold tracking-tight text-ink">{product.name}</h1>

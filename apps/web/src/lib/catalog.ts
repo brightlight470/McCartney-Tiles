@@ -11,6 +11,20 @@ export interface MediaRef {
   sizes?: Record<string, { url?: string | null } | undefined>
 }
 
+/**
+ * Absolute URL for a Payload media ref, preferring a named image size. Media is served by
+ * the CMS, so relative Payload URLs are prefixed with CMS_URL to be browser-loadable.
+ */
+export function mediaUrl(
+  ref?: MediaRef | string | number | null,
+  size?: 'thumbnail' | 'card' | 'hero',
+): string | null {
+  if (!ref || typeof ref !== 'object') return null
+  const rel = (size && ref.sizes?.[size]?.url) || ref.url
+  if (!rel) return null
+  return rel.startsWith('http') ? rel : `${CMS_URL}${rel}`
+}
+
 export interface Range {
   id: string | number
   name: string
