@@ -15,6 +15,7 @@
     "migrate": "payload migrate",
     "migrate:create": "payload migrate:create",
     "seed": "tsx src/seed.ts",
+    "publish:all": "tsx src/publish-all.ts",
     "reindex": "tsx src/reindex.ts",
     "create:testdata": "tsx src/create-test-data.ts",
     "migrate:suppliers": "tsx src/migrate-suppliers.ts",
