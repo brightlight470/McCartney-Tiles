@@ -7,8 +7,8 @@ interface AnimatedLogoProps {
   reversed?: boolean
   className?: string
   title?: string
-  /** Replay the entrance on every mount. Default plays once per page load. */
-  replay?: boolean
+  /** Re-run the entrance on this cadence, in ms. Default 10000 (every 10s). Pass 0 to play once. */
+  loopMs?: number
 }
 
 /**
@@ -19,19 +19,15 @@ interface AnimatedLogoProps {
  *
  * Static by default — the SVG renders the final lockup on the server and with
  * JavaScript disabled. The entrance is added after hydration via the `.mc-anim`
- * class (keyframes live in the brand theme stylesheet) and is suppressed for
- * `prefers-reduced-motion`.
+ * class (keyframes live in the brand theme stylesheet), replays on the `loopMs`
+ * cadence, and is suppressed entirely for `prefers-reduced-motion`.
  */
-
-// Plays once per full page load. Client-side route changes that remount the
-// header render the lockup static instead of re-running the entrance.
-let hasPlayed = false
 
 export function AnimatedLogo({
   reversed = false,
   className,
   title = 'McCartney Tiles',
-  replay = false,
+  loopMs = 10000,
 }: AnimatedLogoProps) {
   const ref = useRef<SVGSVGElement>(null)
   const blue = '#23349d'
@@ -48,12 +44,25 @@ export function AnimatedLogo({
   useEffect(() => {
     const svg = ref.current
     if (!svg) return
-    if (!replay && hasPlayed) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    svg.classList.add('mc-anim')
-    hasPlayed = true
-    return () => svg.classList.remove('mc-anim')
-  }, [replay])
+
+    const play = () => {
+      // Remove then re-add the class with a reflow in between so the CSS
+      // animation restarts from frame zero on every cycle.
+      svg.classList.remove('mc-anim')
+      void svg.getBoundingClientRect()
+      svg.classList.add('mc-anim')
+    }
+
+    play()
+    if (!loopMs) return () => svg.classList.remove('mc-anim')
+
+    const id = window.setInterval(play, loopMs)
+    return () => {
+      window.clearInterval(id)
+      svg.classList.remove('mc-anim')
+    }
+  }, [loopMs])
 
   return (
     <svg

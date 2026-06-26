@@ -11,7 +11,7 @@ export const NAV = [
 
 export function SiteHeader() {
   return (
-    <header className="border-b border-border bg-white">
+    <header className="sticky top-0 z-50 border-b border-border bg-white">
       <Container className="flex h-20 items-center justify-between">
         <Link href="/">
           <AnimatedLogo className="h-9 w-auto" title="McCartney Tiles home" />
