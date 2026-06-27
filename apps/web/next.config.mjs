@@ -21,13 +21,16 @@ const nextConfig = {
     ],
   },
   async headers() {
+    // Media is served by the CMS (Payload), a different origin from the web app, so its
+    // origin must be allowed for images. Env-driven: prod picks up the hosted CMS domain.
+    const cmsOrigin = process.env.CMS_URL ?? 'http://localhost:3001'
     const csp = [
       "default-src 'self'",
       "base-uri 'self'",
       "form-action 'self'",
       "frame-ancestors 'self'",
       "object-src 'none'",
-      "img-src 'self' data: https://www.mccartneytiles.com https://mccartneytiles.com",
+      `img-src 'self' data: ${cmsOrigin} https://www.mccartneytiles.com https://mccartneytiles.com`,
       // Next.js requires 'unsafe-inline'/'unsafe-eval' without nonces; tighten with a nonce middleware later.
       "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
       "style-src 'self' 'unsafe-inline'",
