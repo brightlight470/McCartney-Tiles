@@ -1,8 +1,15 @@
 import Link from 'next/link'
 import { Container } from '@mccartney/ui'
 import { NAV } from './SiteHeader'
+import { RegionSwitcher } from './RegionSwitcher'
+import { getRegion } from '@/lib/region.server'
+import { REGION_LABELS } from '@/lib/region'
 
-export function SiteFooter() {
+export async function SiteFooter() {
+  const { region, capabilities } = await getRegion()
+  const capabilityNote = capabilities.canSeeStore
+    ? `Showing ${REGION_LABELS[region]} — showroom and live stock.`
+    : 'Showing rest of world — showroom and enquiry. Online stock is Ireland and Northern Ireland only.'
   return (
     <footer className="mt-24 border-t border-border bg-white py-12">
       <Container className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
@@ -20,7 +27,11 @@ export function SiteFooter() {
           ))}
         </nav>
       </Container>
-      <Container className="mt-8 text-xs text-slate">
+      <Container className="mt-8 flex flex-col gap-3 border-t border-border pt-6 text-xs text-slate sm:flex-row sm:items-center sm:justify-between">
+        <p>{capabilityNote}</p>
+        <RegionSwitcher current={region} />
+      </Container>
+      <Container className="mt-6 text-xs text-slate">
         <p>&copy; {new Date().getFullYear()} McCartney Tiles. Randalstown, Co. Antrim.</p>
       </Container>
     </footer>

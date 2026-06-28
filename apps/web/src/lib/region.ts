@@ -5,6 +5,21 @@
  */
 export type Region = 'IE' | 'NI' | 'ROW'
 
+export const REGIONS: Region[] = ['NI', 'IE', 'ROW']
+
+export const REGION_LABELS: Record<Region, string> = {
+  NI: 'Northern Ireland',
+  IE: 'Ireland',
+  ROW: 'Rest of world',
+}
+
+/** Cookie holding the visitor's manual region choice (overrides geo-IP). */
+export const REGION_COOKIE = 'mc_region'
+
+export function isRegion(value: unknown): value is Region {
+  return value === 'NI' || value === 'IE' || value === 'ROW'
+}
+
 export interface Capabilities {
   canBrowse: boolean
   canSeeStore: boolean
@@ -34,4 +49,13 @@ export function resolveRegion(countryCode?: string | null): Region {
   if (cc === 'GB') return 'NI'
   if (cc === 'IE') return 'IE'
   return 'ROW'
+}
+
+/**
+ * The active region for a request: a valid manual cookie choice wins; otherwise fall back to
+ * the geo-IP country code; otherwise the default. Pure so it can be unit-tested.
+ */
+export function resolveActiveRegion(cookieValue?: string | null, countryCode?: string | null): Region {
+  if (isRegion(cookieValue)) return cookieValue
+  return resolveRegion(countryCode)
 }

@@ -3,6 +3,21 @@
 All notable changes to the McCartney Tiles Phase-1 build are recorded here.
 Versioning follows the client convention: **minor = 1.x**, **major = x.1**.
 
+## [1.9.0] — 2026-06-28
+
+### Added — geolocation UI (Handover §8)
+
+- **Region switcher** in the footer (Northern Ireland / Ireland / Rest of world) with the choice
+  remembered in the `mc_region` cookie; a manual choice always overrides geo-IP.
+- **Geo-IP seeding** in the proxy: first visit resolves the region from the edge country header
+  (`x-vercel-ip-country` / `cf-ipcountry`) and seeds the cookie. Server `getRegion()` resolves
+  capabilities per request.
+- **Capability surface**: the footer states what the region can do (NI/IE — showroom + live stock;
+  rest of world — showroom + enquiry). Gates commerce capability, never indexable content.
+- **Cookie-consent banner** (necessary-cookies-only) with a remembered acknowledgement, plus a
+  factual interim `/privacy` notice listing the three necessary cookies.
+- Tests: `resolveActiveRegion` cookie-precedence + `isRegion` guard (region suite now 6).
+
 ## [1.8.0] — 2026-06-28
 
 ### Changed — image optimisation
