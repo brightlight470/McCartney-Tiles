@@ -3,6 +3,15 @@
 All notable changes to the McCartney Tiles Phase-1 build are recorded here.
 Versioning follows the client convention: **minor = 1.x**, **major = x.1**.
 
+## [1.11.0] — 2026-06-28
+
+### Added — remaining supplier logos
+
+- `migrate:suppliers` is now brand-list driven and extension-agnostic: located and imported the
+  six brand logos the original `.png`-only filter missed (Cerdisa, Ricchetti, Tagina, Elios
+  Ceramica, Porcelánicos HDC, GCR). Supplier roster is now 17, matching the homepage strip.
+  Idempotent — existing suppliers are skipped on re-run.
+
 ## [1.10.0] — 2026-06-28
 
 ### Added — legacy size-page redirects
