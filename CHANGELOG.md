@@ -3,6 +3,17 @@
 All notable changes to the McCartney Tiles Phase-1 build are recorded here.
 Versioning follows the client convention: **minor = 1.x**, **major = x.1**.
 
+## [1.10.0] — 2026-06-28
+
+### Added — legacy size-page redirects
+
+- Enumerated the 59 size category pages from the live `/tile-viewer/` and 301'd each to its
+  category facet (porcelain → `material=porcelain`, wall → `application=wall`, wood-effect →
+  `effect=wood`, outdoor → `application=outdoor`). The faceted search has no exact-dimension
+  facet (`size` = `sizeBand`), so mapping to the category avoids empty exact-size results.
+- The legacy redirect map is now ~131 rules (facets, colours, finishes, edges, formats, sizes,
+  content). Tests cover the new size mappings.
+
 ## [1.9.0] — 2026-06-28
 
 ### Added — geolocation UI (Handover §8)

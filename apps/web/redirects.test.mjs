@@ -20,4 +20,19 @@ describe('legacyRedirects', () => {
     )
     expect(redirects.find((r) => r.source === '/about-us')?.destination).toBe('/about')
   })
+
+  it('maps legacy size pages to their category facet', () => {
+    expect(redirects.find((r) => r.source === '/600x600-mm-porcelain-tiles')?.destination).toBe(
+      '/ranges?material=porcelain',
+    )
+    expect(redirects.find((r) => r.source === '/300x600-mm-wall-tiles')?.destination).toBe(
+      '/ranges?application=wall',
+    )
+    expect(redirects.find((r) => r.source === '/600x600-mm-wood-effect-tiles')?.destination).toBe(
+      '/ranges?effect=wood',
+    )
+    expect(redirects.find((r) => r.source === '/600x600x20-mm-outdoor-tiles')?.destination).toBe(
+      '/ranges?application=outdoor',
+    )
+  })
 })

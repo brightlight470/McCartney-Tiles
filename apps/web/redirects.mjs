@@ -82,6 +82,78 @@ const TO_RANGES = [
   'sonas-bathrooms',
 ]
 
+// Legacy size category pages (enumerated from /tile-viewer/). The faceted search has no
+// exact-dimension facet (size = sizeBand), so these map to the page's category facet — relevant
+// and never an empty exact-size result. Slugs are <WxH>[x20]-mm-<category>-tiles.
+const SIZE_SLUGS = [
+  '1000x1000-mm-porcelain-tiles',
+  '100x600-mm-porcelain-tiles',
+  '100x600-mm-wood-effect-tiles',
+  '100x700-mm-wood-effect-tiles',
+  '1200x1200x20-mm-outdoor-tiles',
+  '150x1200-mm-wood-effect-tiles',
+  '150x300-mm-porcelain-tiles',
+  '150x800-mm-wood-effect-tiles',
+  '150x900-mm-wood-effect-tiles',
+  '200x1200-mm-wood-effect-tiles',
+  '200x200-mm-porcelain-tiles',
+  '200x200-mm-wall-tiles',
+  '200x600-mm-wall-tiles',
+  '200x800-mm-wood-effect-tiles',
+  '240x880-mm-wood-effect-tiles',
+  '250x1500-mm-wood-effect-tiles',
+  '250x250-mm-porcelain-tiles',
+  '250x400-mm-wall-tiles',
+  '250x500-mm-wall-tiles',
+  '250x750-mm-wall-tiles',
+  '265x1800-mm-wood-effect-tiles',
+  '300x1200-mm-porcelain-tiles',
+  '300x1200-mm-wood-effect-tiles',
+  '300x1200x20-mm-outdoor-tiles',
+  '300x300-mm-porcelain-tiles',
+  '300x600-mm-porcelain-tiles',
+  '300x600-mm-wall-tiles',
+  '300x600x20-mm-outdoor-tiles',
+  '300x900-mm-wall-tiles',
+  '310x980-mm-wall-tiles',
+  '315x1000-mm-wall-tiles',
+  '320x625-mm-wall-tiles',
+  '333x550-mm-wall-tiles',
+  '333x800-mm-wall-tiles',
+  '400x1200-mm-wall-tiles',
+  '450x1200-mm-wall-tiles',
+  '450x450-mm-porcelain-tiles',
+  '450x900-mm-porcelain-tiles',
+  '450x900-mm-wall-tiles',
+  '450x900x20-mm-outdoor-tiles',
+  '500x500-mm-porcelain-tiles',
+  '600x1200-mm-porcelain-tiles',
+  '600x1200-mm-wall-tiles',
+  '600x1200-mm-wood-effect-tiles',
+  '600x1200x20-mm-outdoor-tiles',
+  '600x600-mm-porcelain-tiles',
+  '600x600-mm-wood-effect-tiles',
+  '600x600x20-mm-outdoor-tiles',
+  '600x900-mm-porcelain-tiles',
+  '600x900x20-mm-outdoor-tiles',
+  '650x1500-mm-porcelain-tiles',
+  '750x1500-mm-porcelain-tiles',
+  '750x750-mm-porcelain-tiles',
+  '800x1600-mm-porcelain-tiles',
+  '800x800-mm-porcelain-tiles',
+  '800x800-mm-wood-effect-tiles',
+  '800x800x20-mm-outdoor-tiles',
+  '900x900-mm-porcelain-tiles',
+  '900x900x20-mm-outdoor-tiles',
+]
+
+const SIZE_SUFFIX_FACET = {
+  'porcelain-tiles': 'material=porcelain',
+  'wall-tiles': 'application=wall',
+  'wood-effect-tiles': 'effect=wood',
+  'outdoor-tiles': 'application=outdoor',
+}
+
 // Legacy info pages → content pages.
 const CONTENT_REDIRECTS = {
   'about-us': '/about',
@@ -103,6 +175,15 @@ export function legacyRedirects() {
   }
   for (const slug of TO_RANGES) {
     redirects.push({ source: `/${slug}`, destination: '/ranges', permanent: true })
+  }
+  for (const slug of SIZE_SLUGS) {
+    const suffix = slug.match(/-mm-(.+)$/)?.[1] ?? ''
+    const facet = SIZE_SUFFIX_FACET[suffix]
+    redirects.push({
+      source: `/${slug}`,
+      destination: facet ? `/ranges?${facet}` : '/ranges',
+      permanent: true,
+    })
   }
   for (const [slug, dest] of Object.entries(CONTENT_REDIRECTS)) {
     redirects.push({ source: `/${slug}`, destination: dest, permanent: true })
