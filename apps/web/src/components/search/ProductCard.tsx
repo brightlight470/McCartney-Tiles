@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { StockBadge } from '@mccartney/ui'
 import type { StockStatus } from '@mccartney/ui'
@@ -21,14 +22,14 @@ export function ProductCard({ product }: { product: ProductDocument }) {
       href={`/product/${product.slug}`}
       className="group block overflow-hidden rounded border border-border bg-white transition-colors hover:border-brand-blue focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:outline-none"
     >
-      <div className="aspect-square bg-mist">
+      <div className="relative aspect-square bg-mist">
         {product.thumbnail ? (
-          // eslint-disable-next-line @next/next/no-img-element -- migrated remote thumbnails; next/image config lands in hardening
-          <img
+          <Image
             src={product.thumbnail}
             alt=""
-            loading="lazy"
-            className="h-full w-full object-cover"
+            fill
+            sizes="(min-width: 1280px) 20vw, (min-width: 640px) 33vw, 50vw"
+            className="object-cover"
           />
         ) : null}
       </div>

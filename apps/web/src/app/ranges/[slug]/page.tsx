@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Container } from '@mccartney/ui'
@@ -48,9 +49,15 @@ export default async function RangePage({ params }: { params: Promise<{ slug: st
           ) : null}
 
           {hero ? (
-            <div className="mt-6 aspect-[16/9] overflow-hidden rounded border border-border bg-mist">
-              {/* eslint-disable-next-line @next/next/no-img-element -- migrated remote media; next/image config lands in hardening */}
-              <img src={hero} alt={range.name} className="h-full w-full object-cover" />
+            <div className="relative mt-6 aspect-[16/9] overflow-hidden rounded border border-border bg-mist">
+              <Image
+                src={hero}
+                alt={range.name}
+                fill
+                sizes="(min-width: 1280px) 1100px, 100vw"
+                className="object-cover"
+                priority
+              />
             </div>
           ) : null}
 
@@ -70,14 +77,14 @@ export default async function RangePage({ params }: { params: Promise<{ slug: st
                       href={`/product/${product.slug}`}
                       className="group block overflow-hidden rounded border border-border bg-white transition-colors hover:border-brand-blue focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:outline-none"
                     >
-                      <div className="aspect-square bg-mist">
+                      <div className="relative aspect-square bg-mist">
                         {thumb ? (
-                          // eslint-disable-next-line @next/next/no-img-element -- migrated remote media; next/image config lands in hardening
-                          <img
+                          <Image
                             src={thumb}
                             alt=""
-                            loading="lazy"
-                            className="h-full w-full object-cover"
+                            fill
+                            sizes="(min-width: 1280px) 20vw, (min-width: 640px) 33vw, 50vw"
+                            className="object-cover"
                           />
                         ) : null}
                       </div>

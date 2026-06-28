@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Container, StockBadge, type StockStatus } from '@mccartney/ui'
@@ -111,10 +112,16 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </nav>
 
           <div className="mt-6 grid grid-cols-1 gap-10 lg:grid-cols-2">
-            <div className="aspect-square overflow-hidden rounded border border-border bg-mist">
+            <div className="relative aspect-square overflow-hidden rounded border border-border bg-mist">
               {image ? (
-                // eslint-disable-next-line @next/next/no-img-element -- migrated remote media; next/image config lands in hardening
-                <img src={image} alt={product.name} className="h-full w-full object-cover" />
+                <Image
+                  src={image}
+                  alt={product.name}
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover"
+                  priority
+                />
               ) : null}
             </div>
 

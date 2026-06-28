@@ -3,6 +3,38 @@
 All notable changes to the McCartney Tiles Phase-1 build are recorded here.
 Versioning follows the client convention: **minor = 1.x**, **major = x.1**.
 
+## [1.8.0] — 2026-06-28
+
+### Changed — image optimisation
+
+- Catalogue imagery (search cards, range hero + thumbnails, product page) now renders through
+  `next/image` — responsive `srcset`, lazy-loading, and AVIF/WebP negotiation — replacing the raw
+  `<img>` tags from the migration. `remotePatterns` now allows the CMS media origin (built from
+  `CMS_URL`, so production picks up the hosted CMS domain).
+- `dangerouslyAllowLocalIP` is enabled only when the CMS origin is localhost (dev); production
+  keeps Next's image-optimiser SSRF guard on.
+
+## [1.7.0] — 2026-06-28
+
+### Added — catalogue photography
+
+- `pull-product-images.py --live` run against the WordPress REST API (brand aliases handled):
+  **82 of 93 ranges** matched to feature swatches and downloaded.
+- `migrate:images:manifest` ingests the authoritative Cowork manifest by exact range name → range
+  `heroImage` + product images (media reused by filename). Supersedes the earlier heuristic match.
+  The 11 unmatched ranges have no swatch on the legacy site and are left for the ingestion tool.
+- `publish:all` — flips all seeded ranges to `showOnWebsite` so the catalogue populates from seed.
+
+### Changed — logo + chrome
+
+- Animated logo replays its entrance on a 10s cadence (`loopMs`); site header is now sticky.
+- Range/product imagery self-hosted in Payload media; `img-src` CSP allows the CMS origin.
+
+### Fixed — local stability
+
+- CMS now runs from a production build (`next start`) to avoid the Windows `next dev` jest-worker
+  crash that intermittently 500'd every API route.
+
 ## [1.6.0] — 2026-06-24
 
 ### Added — brand identity v1.0

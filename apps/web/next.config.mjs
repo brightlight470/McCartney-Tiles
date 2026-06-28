@@ -1,5 +1,13 @@
 import { legacyRedirects } from './redirects.mjs'
 
+// Media is served by the CMS (Payload) on its own origin; env-driven so prod picks up the
+// hosted CMS domain. Shared by next/image remotePatterns and the img-src CSP below.
+const CMS_ORIGIN = process.env.CMS_URL ?? 'http://localhost:3001'
+const cmsUrl = new URL(CMS_ORIGIN)
+// In local dev the CMS is on localhost, which the image optimiser's SSRF guard blocks. Allow
+// it only for a private/local CMS host; production (public CMS domain) keeps the guard on.
+const cmsIsLocal = ['localhost', '127.0.0.1', '::1'].includes(cmsUrl.hostname)
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: [
@@ -14,16 +22,24 @@ const nextConfig = {
   },
   images: {
     formats: ['image/avif', 'image/webp'],
+    dangerouslyAllowLocalIP: cmsIsLocal,
     remotePatterns: [
-      // Sprint 1: migrate imagery directly from the legacy WordPress site.
+      // Self-hosted catalogue media, served by the CMS (Payload).
+      {
+        protocol: cmsUrl.protocol.replace(':', ''),
+        hostname: cmsUrl.hostname,
+        port: cmsUrl.port || undefined,
+        pathname: '/api/media/**',
+      },
+      // Legacy WordPress site (migration source).
       { protocol: 'https', hostname: 'www.mccartneytiles.com' },
       { protocol: 'https', hostname: 'mccartneytiles.com' },
     ],
   },
   async headers() {
-    // Media is served by the CMS (Payload), a different origin from the web app, so its
-    // origin must be allowed for images. Env-driven: prod picks up the hosted CMS domain.
-    const cmsOrigin = process.env.CMS_URL ?? 'http://localhost:3001'
+    // Optimised images are same-origin (/_next/image); the CMS origin still needs allowing for
+    // any direct media references and as the next/image upstream.
+    const cmsOrigin = CMS_ORIGIN
     const csp = [
       "default-src 'self'",
       "base-uri 'self'",
