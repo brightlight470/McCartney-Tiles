@@ -3,6 +3,24 @@
 All notable changes to the McCartney Tiles Phase-1 build are recorded here.
 Versioning follows the client convention: **minor = 1.x**, **major = x.1**.
 
+## [1.13.0] — 2026-06-29
+
+### Added — suitability (wall / floor / exterior) filter + symbols
+
+- Products are tagged with their **application** (wall / floor / wall-floor / outdoor) by crawling
+  the legacy category pages (`migrate:application`): 36 exterior, 41 wall-and-floor, 12 floor, 5
+  wall-only. Unmatched default to wall-and-floor; staff refine in the PIM.
+- The search index gains a multi-value **`applications`** facet so the **Application filter shows
+  Wall / Floor / Exterior** and a wall-and-floor tile matches both Wall and Floor.
+- Each tile shows a **suitability symbol** (legacy descriptive symbols): green house = exterior,
+  blue = walls & floors, **purple = walls only** (the legacy site showed this in red; re-coloured
+  to purple, off the brand's no-red palette). Rendered on cards and product pages.
+
+### Changed — Size filter shows actual dimensions
+
+- The Size filter now lists actual tile dimensions (e.g. 600 × 600 mm) instead of the
+  Small/Medium/Large format bands, filtering on `sizeMm`.
+
 ## [1.12.0] — 2026-06-29
 
 ### Added — URL + PDF ingestion adapters (Handover §6.1)

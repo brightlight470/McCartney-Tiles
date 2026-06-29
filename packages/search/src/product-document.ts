@@ -12,6 +12,8 @@ export interface ProductDocument {
   sizeMm: string | null
   sizeBand: string | null
   application: string | null
+  /** Suitability as a multi-value facet: any of 'wall' | 'floor' | 'outdoor'. */
+  applications: string[]
   colourGroup: string | null
   finish: string | null
   effect: string | null
@@ -58,6 +60,7 @@ export interface IndexableProduct {
   sizeMm?: string | null
   sizeBand?: string | null
   application?: string | null
+  applications?: string[] | null
   colourGroup?: string | null
   finish?: string | null
   effect?: string | null
@@ -84,6 +87,7 @@ export function toProductDocument(p: IndexableProduct): ProductDocument {
     sizeMm: p.sizeMm ?? null,
     sizeBand: p.sizeBand ?? null,
     application: p.application ?? null,
+    applications: p.applications ?? [],
     colourGroup: p.colourGroup ?? null,
     finish: p.finish ?? null,
     effect: p.effect ?? null,

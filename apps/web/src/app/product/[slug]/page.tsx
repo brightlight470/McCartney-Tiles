@@ -8,6 +8,7 @@ import { SiteHeader } from '@/components/SiteHeader'
 import { SiteFooter } from '@/components/SiteFooter'
 import { RoomvoVisualiser } from '@/components/RoomvoVisualiser'
 import { AddToBasketButton } from '@/components/AddToBasketButton'
+import { ApplicationSymbol } from '@/components/ApplicationSymbol'
 import { JsonLd } from '@/components/JsonLd'
 import { getProductBySlug, getStockForProduct, mediaUrl, type Product, type Range } from '@/lib/catalog'
 import { getCurrentUser, getProductPrice } from '@/lib/auth'
@@ -133,6 +134,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 {stock.inStock && stock.totalM2 ? (
                   <span className="tabular text-sm text-slate">{stock.totalM2} m² in stock</span>
                 ) : null}
+                <ApplicationSymbol application={product.application} />
               </div>
 
               <div className="mt-6 rounded border border-border bg-white p-4">

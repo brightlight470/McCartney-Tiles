@@ -21,7 +21,8 @@
     "migrate:suppliers": "tsx src/migrate-suppliers.ts",
     "migrate:taxonomy": "tsx src/migrate-taxonomy.ts",
     "migrate:images": "tsx src/migrate-product-images.ts",
-    "migrate:images:manifest": "tsx src/migrate-images-manifest.ts"
+    "migrate:images:manifest": "tsx src/migrate-images-manifest.ts",
+    "migrate:application": "tsx src/migrate-application.ts"
   },
   "dependencies": {
     "@mccartney/db": "workspace:*",

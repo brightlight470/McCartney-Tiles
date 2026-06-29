@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { StockBadge } from '@mccartney/ui'
+import { ApplicationSymbol } from '@/components/ApplicationSymbol'
 import type { StockStatus } from '@mccartney/ui'
 import type { ProductDocument } from '@mccartney/search'
 
@@ -38,11 +39,10 @@ export function ProductCard({ product }: { product: ProductDocument }) {
         {product.sizeMm ? (
           <p className="tabular mt-1 text-sm text-slate">{product.sizeMm} mm</p>
         ) : null}
-        {status ? (
-          <div className="mt-3">
-            <StockBadge status={status} />
-          </div>
-        ) : null}
+        <div className="mt-3 flex items-center gap-2">
+          {status ? <StockBadge status={status} /> : null}
+          <ApplicationSymbol application={product.application} />
+        </div>
       </div>
     </Link>
   )

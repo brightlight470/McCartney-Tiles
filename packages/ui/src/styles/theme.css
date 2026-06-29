@@ -14,6 +14,11 @@
   --color-status-out-of-stock: #b23b3b;
   --color-status-on-order: #b7791f;
 
+  /* Application/suitability symbols: green = exterior, blue = wall & floor, purple = wall only. */
+  --color-app-outdoor: #1e7f4f;
+  --color-app-both: #23349d;
+  --color-app-wall: #7c3aed;
+
   --radius-sm: 8px;
   --radius: 14px;
 

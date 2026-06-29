@@ -11,6 +11,7 @@ export const FACET_ATTRIBUTES = [
   'effect',
   'material',
   'application',
+  'applications',
   'edge',
   'design',
   'format',

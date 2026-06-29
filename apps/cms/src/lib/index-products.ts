@@ -54,6 +54,18 @@ const idOf = (rel: StockRow['product']): string =>
 const MEDIA_BASE =
   process.env.CMS_URL ?? process.env.PAYLOAD_PUBLIC_SERVER_URL ?? 'http://localhost:3001'
 
+// Single application value → multi-value suitability facet (wall / floor / outdoor).
+const APPLICATIONS_BY_VALUE: Record<string, string[]> = {
+  wall: ['wall'],
+  floor: ['floor'],
+  'wall-floor': ['wall', 'floor'],
+  outdoor: ['outdoor'],
+  mosaic: ['wall', 'floor'],
+}
+function applicationsFor(application?: string | null): string[] {
+  return application ? (APPLICATIONS_BY_VALUE[application] ?? []) : []
+}
+
 function thumbnailFor(images: ProductRow['images']): string | null {
   const first = Array.isArray(images) ? images[0] : null
   if (!first || typeof first !== 'object') return null
@@ -126,6 +138,7 @@ export async function indexProductsFromDb(
       inStock: stock.inStock,
       stockStatus: stock.status,
       thumbnail: thumbnailFor(p.images),
+      applications: applicationsFor(p.application),
     }
     docs.push(toProductDocument(doc))
   }
