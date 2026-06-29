@@ -43,18 +43,22 @@ const nextConfig = {
     // Optimised images are same-origin (/_next/image); the CMS origin still needs allowing for
     // any direct media references and as the next/image upstream.
     const cmsOrigin = CMS_ORIGIN
+    // Roomvo assistant widget (mobile only) — its script, API calls, images, fonts and the
+    // visualiser iframe come from roomvo.com.
+    const roomvo = 'https://roomvo.com https://*.roomvo.com'
     const csp = [
       "default-src 'self'",
       "base-uri 'self'",
       "form-action 'self'",
       "frame-ancestors 'self'",
       "object-src 'none'",
-      `img-src 'self' data: ${cmsOrigin} https://www.mccartneytiles.com https://mccartneytiles.com`,
+      `img-src 'self' data: ${cmsOrigin} https://www.mccartneytiles.com https://mccartneytiles.com ${roomvo}`,
       // Next.js requires 'unsafe-inline'/'unsafe-eval' without nonces; tighten with a nonce middleware later.
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-      "style-src 'self' 'unsafe-inline'",
-      "font-src 'self' data:",
-      "connect-src 'self'",
+      `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${roomvo}`,
+      `style-src 'self' 'unsafe-inline' ${roomvo}`,
+      `font-src 'self' data: ${roomvo}`,
+      `connect-src 'self' ${roomvo}`,
+      `frame-src ${roomvo}`,
     ].join('; ')
     const headers = [
       { key: 'Content-Security-Policy', value: csp },

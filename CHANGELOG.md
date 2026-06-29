@@ -3,6 +3,18 @@
 All notable changes to the McCartney Tiles Phase-1 build are recorded here.
 Versioning follows the client convention: **minor = 1.x**, **major = x.1**.
 
+## [1.14.0] — 2026-06-29
+
+### Added — Roomvo assistant (mobile only)
+
+- The Roomvo B2B assistant widget (`assistant.js`, bottom-right, en-gb) loads on **mobile devices
+  only** — injected client-side behind a `(max-width: 767px)` media query, so desktop never fetches
+  it. Separate from the per-product RoomvoVisualiser (still feature-flagged).
+- CSP extended to allow `roomvo.com` for script / connect / img / font / frame.
+- Verified: injected on a 390px viewport (correct src + data-locale/position), absent at 1280px.
+  Note: Roomvo's visitor API returns 400 until the live domain is registered in a Roomvo account
+  (Phase-3 onboarding) — the integration is correct; the account link is the remaining gate.
+
 ## [1.13.0] — 2026-06-29
 
 ### Added — suitability (wall / floor / exterior) filter + symbols
