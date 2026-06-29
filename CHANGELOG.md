@@ -3,6 +3,22 @@
 All notable changes to the McCartney Tiles Phase-1 build are recorded here.
 Versioning follows the client convention: **minor = 1.x**, **major = x.1**.
 
+## [1.12.0] — 2026-06-29
+
+### Added — URL + PDF ingestion adapters (Handover §6.1)
+
+- **URL adapter**: fetches a supplier/category page and scrapes candidate product names (image alt
+  text, image filenames, headings) into draft ranges for review. Parses HTML passed directly too,
+  so the scrape logic is unit-tested offline.
+- **PDF adapter**: extracts selectable text with pdf.js, reconstructing lines from text-item
+  positions so tabular spec/price sheets keep their rows, then runs the shared parser. Scanned
+  PDFs (no text layer) report a clear warning — OCR needs a gated vision/OCR key.
+- Shared `parseLinesToRanges` (size-token split, noise filtering, de-dupe) feeds both, mirroring
+  the CSV adapter. Image adapter remains a stub pending a vision API key.
+- The staff ingest preview route dispatches by source kind; the ingest tool gains CSV / URL / PDF
+  tabs and surfaces adapter warnings. Tests: parser + URL adapter (ingestion suite now 10); PDF
+  round-trip verified end-to-end against a generated PDF.
+
 ## [1.11.0] — 2026-06-28
 
 ### Added — remaining supplier logos

@@ -63,10 +63,23 @@ function toEdit(ranges: DraftRange[]): EditRange[] {
   }))
 }
 
+type SourceKind = 'csv' | 'url' | 'pdf'
+
+const KIND_TABS: { key: SourceKind; label: string }[] = [
+  { key: 'csv', label: 'CSV / Excel' },
+  { key: 'url', label: 'URL' },
+  { key: 'pdf', label: 'PDF' },
+]
+
 export function IngestionTool() {
+  const [kind, setKind] = useState<SourceKind>('csv')
   const [csv, setCsv] = useState('')
+  const [url, setUrl] = useState('')
+  const [pdfData, setPdfData] = useState('')
+  const [pdfName, setPdfName] = useState('')
   const [stage, setStage] = useState<'input' | 'review' | 'done'>('input')
   const [ranges, setRanges] = useState<EditRange[]>([])
+  const [warnings, setWarnings] = useState<string[]>([])
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [summary, setSummary] = useState<{
@@ -79,20 +92,23 @@ export function IngestionTool() {
     setBusy(true)
     setError(null)
     try {
+      const body =
+        kind === 'csv' ? { kind, csv } : kind === 'url' ? { kind, url } : { kind, pdf: pdfData }
       const res = await fetch('/api/staff/ingest/preview', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ csv }),
+        body: JSON.stringify(body),
       })
       const data = (await res.json()) as {
         ok: boolean
         error?: string
-        result?: { ranges: DraftRange[] }
+        result?: { ranges: DraftRange[]; warnings?: string[] }
       }
       if (!data.ok || !data.result) {
         setError(data.error ?? 'Preview failed')
       } else {
         setRanges(toEdit(data.result.ranges))
+        setWarnings(data.result.warnings ?? [])
         setStage('review')
       }
     } catch {
@@ -173,8 +189,13 @@ export function IngestionTool() {
           type="button"
           onClick={() => {
             setStage('input')
+            setKind('csv')
             setCsv('')
+            setUrl('')
+            setPdfData('')
+            setPdfName('')
             setRanges([])
+            setWarnings([])
             setSummary(null)
           }}
           className="mt-4 inline-flex h-10 items-center rounded border border-border px-4 text-sm font-medium hover:border-brand-blue"
@@ -195,25 +216,94 @@ export function IngestionTool() {
 
       {stage === 'input' ? (
         <div className="space-y-4">
-          <input
-            type="file"
-            accept=".csv,text/csv"
-            onChange={async (e) => {
-              const file = e.target.files?.[0]
-              if (file) setCsv(await file.text())
-            }}
-            className="block text-sm"
-          />
-          <textarea
-            value={csv}
-            onChange={(e) => setCsv(e.target.value)}
-            rows={10}
-            placeholder="range_name,size_mm,...  (paste CSV or choose a file above)"
-            className="w-full rounded border border-border bg-white p-3 font-mono text-xs focus-visible:border-brand-blue focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:outline-none"
-          />
+          <div className="flex flex-wrap items-center gap-2">
+            {KIND_TABS.map((t) => (
+              <button
+                key={t.key}
+                type="button"
+                onClick={() => setKind(t.key)}
+                aria-pressed={kind === t.key}
+                className={
+                  kind === t.key
+                    ? 'rounded border border-brand-blue bg-mist px-3 py-1.5 text-sm font-medium text-brand-blue'
+                    : 'rounded border border-border px-3 py-1.5 text-sm text-slate hover:border-brand-blue'
+                }
+              >
+                {t.label}
+              </button>
+            ))}
+            <span className="text-xs text-slate">
+              Image (photo) ingestion needs a vision API key — added later.
+            </span>
+          </div>
+
+          {kind === 'csv' ? (
+            <>
+              <input
+                type="file"
+                accept=".csv,text/csv"
+                onChange={async (e) => {
+                  const file = e.target.files?.[0]
+                  if (file) setCsv(await file.text())
+                }}
+                className="block text-sm"
+              />
+              <textarea
+                value={csv}
+                onChange={(e) => setCsv(e.target.value)}
+                rows={10}
+                placeholder="range_name,size_mm,...  (paste CSV or choose a file above)"
+                className="w-full rounded border border-border bg-white p-3 font-mono text-xs focus-visible:border-brand-blue focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:outline-none"
+              />
+            </>
+          ) : null}
+
+          {kind === 'url' ? (
+            <>
+              <input
+                type="url"
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                placeholder="https://supplier.example/collection"
+                className="w-full rounded border border-border bg-white p-3 text-sm focus-visible:border-brand-blue focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:outline-none"
+              />
+              <p className="text-xs text-slate">
+                Fetches the page and scrapes candidate product names and sizes. Low-confidence —
+                confirm every field before publishing.
+              </p>
+            </>
+          ) : null}
+
+          {kind === 'pdf' ? (
+            <>
+              <input
+                type="file"
+                accept="application/pdf,.pdf"
+                onChange={async (e) => {
+                  const file = e.target.files?.[0]
+                  if (!file) return
+                  setPdfName(file.name)
+                  const bytes = new Uint8Array(await file.arrayBuffer())
+                  let bin = ''
+                  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]!)
+                  setPdfData(btoa(bin))
+                }}
+                className="block text-sm"
+              />
+              <p className="text-xs text-slate">
+                {pdfName
+                  ? `Loaded ${pdfName}. Extracts selectable text (table rows kept). Scanned PDFs need OCR (not configured).`
+                  : 'Upload a supplier PDF. Extracts selectable text; scanned PDFs need OCR (not configured).'}
+              </p>
+            </>
+          ) : null}
+
           <button
             type="button"
-            disabled={busy || !csv.trim()}
+            disabled={
+              busy ||
+              (kind === 'csv' ? !csv.trim() : kind === 'url' ? !url.trim() : !pdfData)
+            }
             onClick={preview}
             className="inline-flex h-11 items-center rounded bg-brand-blue px-5 font-display font-semibold text-white hover:bg-ink disabled:opacity-50"
           >
@@ -228,6 +318,13 @@ export function IngestionTool() {
             Review {ranges.length} ranges / {productCount} products. Suggested values are pre-filled
             — correct anything, then publish.
           </p>
+          {warnings.length ? (
+            <ul className="list-disc rounded border border-border bg-porcelain p-3 pl-7 text-xs text-slate">
+              {warnings.map((w, i) => (
+                <li key={i}>{w}</li>
+              ))}
+            </ul>
+          ) : null}
           {ranges.map((range, ri) => (
             <div key={range.name}>
               <h2 className="font-display text-lg font-semibold text-ink">{range.name}</h2>

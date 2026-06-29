@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "@mccartney/db": "workspace:*",
-    "papaparse": "^5.5.4"
+    "papaparse": "^5.5.4",
+    "pdfjs-dist": "^6.1.200"
   },
   "devDependencies": {
     "@types/papaparse": "^5.3.16",

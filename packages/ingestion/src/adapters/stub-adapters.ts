@@ -3,11 +3,10 @@ import { NotImplementedAdapterError } from './types'
 import type { AdapterInput, SourceAdapter } from './types'
 
 /**
- * Placeholders for the remaining input adapters (Handover §6.1). Interfaces are stable;
- * implementations land in Sprint 1:
- *  - PDF: table + text extraction, OCR fallback, LLM field-mapping for messy docs.
- *  - URL: fetch + scrape product attributes/images.
- *  - image: vision model extracts range name, sizes, colour cues.
+ * Image adapter placeholder (Handover §6.1d): a vision model extracts range name, sizes and
+ * colour cues from a range photo. Implementation waits on a vision API key (gated input); the
+ * interface is stable so the pipeline and UI can branch on it now. (CSV, URL and PDF adapters
+ * are implemented in their own modules.)
  */
 class StubAdapter implements SourceAdapter {
   constructor(readonly kind: SourceKind) {}
@@ -16,16 +15,6 @@ class StubAdapter implements SourceAdapter {
   }
 }
 
-export class PdfAdapter extends StubAdapter {
-  constructor() {
-    super('pdf')
-  }
-}
-export class UrlAdapter extends StubAdapter {
-  constructor() {
-    super('url')
-  }
-}
 export class ImageAdapter extends StubAdapter {
   constructor() {
     super('image')

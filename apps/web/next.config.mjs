@@ -10,6 +10,9 @@ const cmsIsLocal = ['localhost', '127.0.0.1', '::1'].includes(cmsUrl.hostname)
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // pdf.js is loaded at runtime by the ingestion PDF adapter (server only) — keep it external
+  // so Next does not try to bundle its worker/legacy build.
+  serverExternalPackages: ['pdfjs-dist'],
   transpilePackages: [
     '@mccartney/ui',
     '@mccartney/crm',
