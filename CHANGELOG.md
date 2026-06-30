@@ -3,6 +3,15 @@
 All notable changes to the McCartney Tiles Phase-1 build are recorded here.
 Versioning follows the client convention: **minor = 1.x**, **major = x.1**.
 
+## [1.17.0] — 2026-06-30
+
+### Changed — mobile filter drawer (/ranges)
+
+- On mobile the facet filters previously filled the screen above the grid. They now collapse behind
+  a **Filters** button (with an active-count badge) that opens a slide-over drawer (scrollable,
+  backdrop, Escape/Show-results to close); the product grid shows immediately. Desktop keeps the
+  inline sidebar unchanged. New `FilterDrawer` client wrapper around `FacetSidebar`.
+
 ## [1.16.0] — 2026-06-30
 
 ### Changed — portrait mobile hero (per-clip reframing)

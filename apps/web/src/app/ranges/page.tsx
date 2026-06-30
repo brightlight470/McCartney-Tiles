@@ -5,11 +5,18 @@ import { searchProducts, type SearchResult } from '@mccartney/search'
 import { SiteHeader } from '@/components/SiteHeader'
 import { SiteFooter } from '@/components/SiteFooter'
 import { FacetSidebar } from '@/components/search/FacetSidebar'
+import { FilterDrawer } from '@/components/search/FilterDrawer'
 import { ActiveFilters } from '@/components/search/ActiveFilters'
 import { Pagination } from '@/components/search/Pagination'
 import { SearchBox } from '@/components/search/SearchBox'
 import { ProductCard } from '@/components/search/ProductCard'
-import { parseSearchParams, sortHref, type RawParams } from '@/lib/search-facets'
+import {
+  activeFilters,
+  isActive,
+  parseSearchParams,
+  sortHref,
+  type RawParams,
+} from '@/lib/search-facets'
 
 export const dynamic = 'force-dynamic'
 
@@ -46,6 +53,7 @@ export default async function RangesPage({ searchParams }: { searchParams: Promi
   }
 
   const activeSort = typeof sp.sort === 'string' ? sp.sort : undefined
+  const activeCount = activeFilters(sp).length + (isActive(sp, 'stock', 'in') ? 1 : 0)
 
   return (
     <>
@@ -62,7 +70,9 @@ export default async function RangesPage({ searchParams }: { searchParams: Promi
           </div>
 
           <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-[16rem_1fr]">
-            <FacetSidebar sp={sp} distribution={result.facetDistribution} />
+            <FilterDrawer activeCount={activeCount}>
+              <FacetSidebar sp={sp} distribution={result.facetDistribution} />
+            </FilterDrawer>
 
             <section aria-label="Results">
               <div className="flex flex-wrap items-center justify-between gap-4">
