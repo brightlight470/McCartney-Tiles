@@ -3,6 +3,14 @@
 All notable changes to the McCartney Tiles Phase-1 build are recorded here.
 Versioning follows the client convention: **minor = 1.x**, **major = x.1**.
 
+## [2.0.2] — 2026-06-30
+
+### Fixed — product card white gap (Range/Products mockups)
+
+- Product cards stretched to the height of the (taller) filter sidebar, leaving a long white gap
+  under the product name — most visible on the Range page (one short row of cards). Added
+  `items-start` to the two-column filter+grid layout so columns size to their own content.
+
 ## [2.0.1] — 2026-06-30
 
 ### Changed — mockup refinements (still /preview, awaiting approval)

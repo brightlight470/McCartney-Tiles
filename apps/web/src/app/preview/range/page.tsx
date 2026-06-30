@@ -51,7 +51,7 @@ export default function PreviewRange() {
           {/* 4 — Products in the range (with filters, change #6) */}
           <section className="mt-12 mb-16" aria-label="Products in this range">
             <h2 className="font-display text-lg font-semibold text-ink">Colours in this range</h2>
-            <div className="mt-6 grid grid-cols-1 gap-10 lg:grid-cols-[16rem_1fr]">
+            <div className="mt-6 grid grid-cols-1 items-start gap-10 lg:grid-cols-[16rem_1fr]">
               <AccordionFilters />
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
                 {range.products.map((p) => (

@@ -18,7 +18,7 @@ export default function PreviewProducts() {
             and sizes.
           </p>
 
-          <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-[16rem_1fr]">
+          <div className="mt-10 grid grid-cols-1 items-start gap-10 lg:grid-cols-[16rem_1fr]">
             <AccordionFilters />
 
             <section aria-label="Results">
