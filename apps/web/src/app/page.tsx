@@ -44,7 +44,7 @@ export default function HomePage() {
                 href="/showrooms"
                 className="inline-flex h-12 items-center justify-center rounded border border-white/70 px-6 font-display font-semibold text-white transition-colors duration-150 hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink focus-visible:outline-none"
               >
-                Book a showroom visit
+                Visit showroom
               </Link>
             </div>
           </Container>

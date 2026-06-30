@@ -31,6 +31,7 @@ export {
   formSubmissionSchema,
   contactSchema,
   brochureSchema,
+  brochureHasContact,
   showroomVisitSchema,
   tradeApplicationSchema,
   sampleRequestSchema,

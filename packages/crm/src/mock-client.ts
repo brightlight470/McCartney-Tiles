@@ -22,9 +22,10 @@ export class MockCrmClient implements CrmClient {
 
     const routing = FORM_ROUTING[data.type]
     const { id } = await this.upsertContact({
-      name: data.name,
+      name: data.name ?? 'Website visitor',
       email: data.email,
       phone: data.phone,
+      whatsapp: 'whatsapp' in data ? data.whatsapp : undefined,
       companyName: 'companyName' in data ? data.companyName : undefined,
       tags: routing.tags,
       pipelineStage: routing.pipelineStage,
@@ -35,7 +36,14 @@ export class MockCrmClient implements CrmClient {
   }
 
   async upsertContact(contact: CrmContact): Promise<{ id: string }> {
-    const existing = [...this.contacts.entries()].find(([, c]) => c.email === contact.email)
+    // Dedup on the best available channel (email, else WhatsApp, else phone); a contact with
+    // no channel always gets a fresh id rather than collapsing onto other channel-less rows.
+    const key = contact.email ?? contact.whatsapp ?? contact.phone
+    const existing = key
+      ? [...this.contacts.entries()].find(
+          ([, c]) => (c.email ?? c.whatsapp ?? c.phone) === key,
+        )
+      : undefined
     const id = existing?.[0] ?? `mock_${++this.seq}`
     this.contacts.set(id, { ...existing?.[1], ...contact })
     return { id }

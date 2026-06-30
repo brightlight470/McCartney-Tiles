@@ -9,17 +9,6 @@ export interface FacetDef {
   options: { label: string; value: string }[]
 }
 
-// Actual tile dimensions (the canonical seed sizes), shown in the Size filter instead of bands.
-const SIZE_MM = [
-  '85x600', '195x1200', '200x200', '200x1200', '300x300', '300x600', '333x650', '450x450',
-  '500x500', '500x1000', '594x594', '600x600', '600x900', '600x1198', '600x1200', '800x800',
-  '900x900', 'Modular',
-]
-const SIZE_OPTIONS = SIZE_MM.map((s) => ({
-  value: s,
-  label: s === 'Modular' ? 'Modular' : `${s.replace('x', ' × ')} mm`,
-}))
-
 // Suitability filter (Handover §8) on the multi-value `applications` attribute: a wall-and-floor
 // tile matches both Wall and Floor; Exterior maps to outdoor.
 const APPLICATION_OPTIONS = [
@@ -36,7 +25,7 @@ export const FACETS: FacetDef[] = [
   { param: 'material', attr: 'material', label: 'Material', options: taxOptions('material') },
   { param: 'application', attr: 'applications', label: 'Application', options: APPLICATION_OPTIONS },
   { param: 'edge', attr: 'edge', label: 'Edge', options: taxOptions('edge') },
-  { param: 'size', attr: 'sizeMm', label: 'Size', options: SIZE_OPTIONS },
+  { param: 'size', attr: 'sizeBand', label: 'Size', options: taxOptions('sizeBand') },
   { param: 'format', attr: 'format', label: 'Format', options: taxOptions('format') },
 ]
 

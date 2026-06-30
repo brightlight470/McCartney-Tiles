@@ -48,3 +48,5 @@ playwright-report/
 /tmp/
 /.cache/
 /tools/
+
+.vercel

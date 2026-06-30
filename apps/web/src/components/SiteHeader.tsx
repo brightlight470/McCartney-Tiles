@@ -14,6 +14,7 @@ const ROOMVO_URL = process.env.NEXT_PUBLIC_ROOMVO_URL
 
 export const NAV: NavItem[] = [
   { label: 'Ranges', href: '/ranges' },
+  { label: 'Bathrooms', href: '/bathrooms' },
   { label: 'Showrooms', href: '/showrooms' },
   { label: 'Projects', href: '/projects' },
   { label: 'About', href: '/about' },

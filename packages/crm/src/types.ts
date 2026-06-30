@@ -22,10 +22,26 @@ export const contactSchema = z.object({
   message: z.string().min(1, 'Enter a message').max(4000),
 })
 
+/**
+ * Brochure download intake (bathrooms page popup). Low-friction: the visitor supplies an
+ * email OR a WhatsApp number — name is optional. "At least one contact channel" is enforced
+ * at the route/client boundary (a refine here would make this a ZodEffects and break the
+ * discriminatedUnion below).
+ */
 export const brochureSchema = z.object({
   type: z.literal('request-brochure'),
-  ...base,
+  name: z.string().max(120).optional(),
+  email: z.string().email('Enter a valid email').optional(),
+  phone: z.string().max(40).optional(),
+  whatsapp: z.string().max(40).optional(),
+  company_website: z.string().max(0).optional(),
+  region: z.enum(['IE', 'NI', 'ROW']).optional(),
 })
+
+/** True when a brochure submission carries at least one usable contact channel. */
+export function brochureHasContact(data: { email?: string; whatsapp?: string }): boolean {
+  return Boolean(data.email?.trim() || data.whatsapp?.trim())
+}
 
 export const showroomVisitSchema = z.object({
   type: z.literal('book-showroom-visit'),
@@ -73,8 +89,9 @@ export const FORM_ROUTING: Record<FormType, { tags: string[]; pipelineStage: str
 
 export interface CrmContact {
   name: string
-  email: string
+  email?: string
   phone?: string
+  whatsapp?: string
   companyName?: string
   tags?: string[]
   pipelineStage?: string

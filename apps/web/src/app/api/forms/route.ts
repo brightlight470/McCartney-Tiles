@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { formSubmissionSchema, getCrmClient } from '@mccartney/crm'
+import { brochureHasContact, formSubmissionSchema, getCrmClient } from '@mccartney/crm'
 
 /**
  * Public form intake → Lead Connect. Validates server-side at the boundary (security),
@@ -18,6 +18,14 @@ export async function POST(request: Request): Promise<NextResponse> {
   if (!parsed.success) {
     return NextResponse.json(
       { ok: false, error: parsed.error.issues[0]?.message ?? 'Invalid submission' },
+      { status: 422 },
+    )
+  }
+
+  // Brochure popup takes an email OR a WhatsApp number — require at least one channel.
+  if (parsed.data.type === 'request-brochure' && !brochureHasContact(parsed.data)) {
+    return NextResponse.json(
+      { ok: false, error: 'Enter an email or WhatsApp number' },
       { status: 422 },
     )
   }

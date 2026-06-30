@@ -33,9 +33,10 @@ export class GhlCrmClient implements CrmClient {
     const routing = FORM_ROUTING[data.type]
     try {
       const { id } = await this.upsertContact({
-        name: data.name,
+        name: data.name ?? 'Website visitor',
         email: data.email,
         phone: data.phone,
+        whatsapp: 'whatsapp' in data ? data.whatsapp : undefined,
         companyName: 'companyName' in data ? data.companyName : undefined,
         tags: routing.tags,
         pipelineStage: routing.pipelineStage,
@@ -60,7 +61,9 @@ export class GhlCrmClient implements CrmClient {
         locationId: this.locationId,
         name: contact.name,
         email: contact.email,
-        phone: contact.phone,
+        // GHL has no dedicated WhatsApp field on upsert; fall back to phone so the number
+        // still lands on the contact for the WhatsApp workflow.
+        phone: contact.phone ?? contact.whatsapp,
         companyName: contact.companyName,
         tags: contact.tags,
       }),

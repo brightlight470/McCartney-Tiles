@@ -3,6 +3,51 @@
 All notable changes to the McCartney Tiles Phase-1 build are recorded here.
 Versioning follows the client convention: **minor = 1.x**, **major = x.1**.
 
+## [2.0.0] — 2026-06-30
+
+Major version — detailed project changes. Shipped live: home CTA, size filter, bathrooms page,
+suitability-icon extraction. Mockups only (awaiting approval before rollout): the Range / Products
+/ Product page redesign. Backend rework for the new structure (auto-crop on upload, range→product
+authoring) is deferred to a later task.
+
+### Added — bathrooms page + brochure popup (change #2)
+
+- New `/bathrooms` page: intro, a bathroom hero, feature-image blocks for two suppliers, and a
+  brochure download CTA. Imagery and the two supplier names are clearly-labelled placeholders until
+  real assets are supplied.
+- New `BrochureDialog` popup captures an **email or WhatsApp number** (name optional) and posts to
+  `/api/forms` (`request-brochure`) → CRM. CRM extended: `brochureSchema` now allows email-or-
+  WhatsApp, `brochureHasContact` enforces at-least-one-channel at the route boundary, `CrmContact`
+  carries `whatsapp` (mapped to phone for GHL). The CRM workflow that sends the brochure is wired
+  later (token pending). Round-trip verified against the mock CRM.
+- `Bathrooms` added to the primary nav.
+
+### Added — suitability icons extracted as overlay layers (change #3)
+
+- `tools/extract-suitability-icons.py` lifts the baked-in suitability marks from the legacy
+  photography (green house = outdoor, blue = walls & floors, red = wall only) into standalone
+  transparent PNGs (`public/suitability/*.png`, mirrored in `packages/ui/assets`).
+- New `SuitabilityOverlay` component layers the extracted icon over a product image. Used in the
+  mockups now; wiring it onto live imagery (and shipping clean, un-marked photos) is the later step.
+
+### Added — v2.0.0 page mockups for approval (change #4, #6, #7)
+
+- `/preview/*` (noindex, sample data, not in nav): **Products** page (one card per colour, sizes
+  collapsed into a black-outline stack on the card, suitability overlay), **Range** page (hero →
+  feature images → two-line copy → colour cards), and **Product** page (feature images, spec, sizes
+  as black-outline tiles). Filters shown as **expandable accordion sections** (changes #6, #7).
+- Decision captured: live nav will carry both **Products** and **Ranges** once approved.
+
+### Changed — home secondary CTA (change #1)
+
+- The home hero's secondary button reads **"Visit showroom"** (was "Book a showroom visit"),
+  still → `/showrooms`.
+
+### Changed — size filter back to bands (change #5)
+
+- The Size facet returns to grouped bands (Small / Medium / Large / X-Large format) instead of
+  actual millimetre dimensions, on the already-indexed `sizeBand` attribute.
+
 ## [1.17.0] — 2026-06-30
 
 ### Changed — mobile filter drawer (/ranges)
