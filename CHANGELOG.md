@@ -3,6 +3,16 @@
 All notable changes to the McCartney Tiles Phase-1 build are recorded here.
 Versioning follows the client convention: **minor = 1.x**, **major = x.1**.
 
+## [2.0.1] — 2026-06-30
+
+### Changed — mockup refinements (still /preview, awaiting approval)
+
+- Products page cards: removed the "N sizes" line below the product name (the size stack on the
+  card already conveys this).
+- Size stacks are ordered numerically, smallest first (sort by tile area; Modular/non-numeric
+  sorts last) — applied to both the card stack and the product-page size row.
+- Product page: the large image is halved in height (aspect-square → 2:1).
+
 ## [2.0.0] — 2026-06-30
 
 Major version — detailed project changes. Shipped live: home CTA, size filter, bathrooms page,

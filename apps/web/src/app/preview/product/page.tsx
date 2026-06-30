@@ -42,7 +42,7 @@ export default function PreviewProduct() {
           <div className="mt-6 grid grid-cols-1 gap-10 lg:grid-cols-2">
             {/* Feature images */}
             <div>
-              <div className="relative aspect-square overflow-hidden rounded border border-border bg-mist">
+              <div className="relative aspect-[2/1] overflow-hidden rounded border border-border bg-mist">
                 <Image src={product.image} alt={`${product.range} ${product.colour}`} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" priority />
                 <SuitabilityOverlay application={product.application} size={48} />
               </div>

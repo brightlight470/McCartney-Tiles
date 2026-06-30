@@ -33,9 +33,6 @@ export function MockProductCard({ product }: { product: MockProduct }) {
         <p className="mt-1 text-sm text-slate">
           {product.effect} · {product.finish}
         </p>
-        <p className="tabular mt-2 text-xs text-slate">
-          {product.sizes.length} {product.sizes.length === 1 ? 'size' : 'sizes'}
-        </p>
       </div>
     </Link>
   )

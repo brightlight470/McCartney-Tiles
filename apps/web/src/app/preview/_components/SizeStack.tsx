@@ -11,6 +11,17 @@ function parseAspect(size: string): { w: number; h: number } {
   return { w: Number(m[1]), h: Number(m[2]) }
 }
 
+// Rule: sizes are ordered numerically, smallest first. Sort by tile area; non-numeric
+// entries (e.g. Modular) sort last.
+function sizeArea(size: string): number {
+  const m = size.replace(/×/g, 'x').match(/(\d+)\s*x\s*(\d+)/i)
+  return m ? Number(m[1]) * Number(m[2]) : Number.POSITIVE_INFINITY
+}
+
+function orderSizes(sizes: string[]): string[] {
+  return [...sizes].sort((a, b) => sizeArea(a) - sizeArea(b))
+}
+
 function MiniTile({ size, base, textClass }: { size: string; base: number; textClass: string }) {
   const { w, h } = parseAspect(size)
   const tw = w >= h ? base : Math.round((base * w) / h)
@@ -34,10 +45,11 @@ export function SizeStack({
   sizes: string[]
   variant?: 'card' | 'detail'
 }) {
+  const ordered = orderSizes(sizes)
   if (variant === 'detail') {
     return (
       <div className="flex flex-wrap items-end gap-5">
-        {sizes.map((s) => (
+        {ordered.map((s) => (
           <MiniTile key={s} size={s} base={56} textClass="mt-1 text-xs font-medium" />
         ))}
       </div>
@@ -46,7 +58,7 @@ export function SizeStack({
   // card overlay — top-right stack, on a translucent chip so outlines read over the photo
   return (
     <div className="absolute right-2 top-2 flex flex-col items-center gap-2 rounded bg-white/85 p-2 backdrop-blur-[1px]">
-      {sizes.map((s) => (
+      {ordered.map((s) => (
         <MiniTile key={s} size={s} base={22} textClass="text-[9px]" />
       ))}
     </div>
