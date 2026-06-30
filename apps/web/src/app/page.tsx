@@ -3,6 +3,7 @@ import { Container } from '@mccartney/ui'
 import { SiteHeader } from '@/components/SiteHeader'
 import { SiteFooter } from '@/components/SiteFooter'
 import { JsonLd, LOCAL_BUSINESS_LD, ORGANISATION_LD } from '@/components/JsonLd'
+import { HeroVideo } from '@/components/HeroVideo'
 
 export default function HomePage() {
   return (
@@ -12,22 +13,12 @@ export default function HomePage() {
       <SiteHeader />
 
       <main>
-        {/* Full-bleed hero. Drop a 16:9 master at public/hero/hero.{webm,mp4} + hero-poster.jpg.
-            object-cover makes the exact source ratio forgiving; bg-ink shows until assets land.
-            Video is suppressed for prefers-reduced-motion (poster/ink shown instead). */}
+        {/* Full-bleed hero. Desktop plays the 16:9 master (hero.mp4); mobile plays a portrait,
+            per-clip-reframed cut (hero-mobile.mp4) so the subjects stay in frame. object-cover
+            keeps the crop forgiving; bg-ink shows until assets load. Video is suppressed for
+            prefers-reduced-motion (poster/ink shown instead). */}
         <section className="relative isolate overflow-hidden bg-ink">
-          <video
-            className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/hero/hero-poster.jpg"
-            aria-hidden="true"
-          >
-            <source src="/hero/hero.webm" type="video/webm" />
-            <source src="/hero/hero.mp4" type="video/mp4" />
-          </video>
+          <HeroVideo />
           {/* Scrim for text contrast (WCAG AA over imagery). */}
           <div className="absolute inset-0 bg-ink/55" aria-hidden="true" />
 

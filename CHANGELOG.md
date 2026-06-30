@@ -3,6 +3,17 @@
 All notable changes to the McCartney Tiles Phase-1 build are recorded here.
 Versioning follows the client convention: **minor = 1.x**, **major = x.1**.
 
+## [1.16.0] — 2026-06-30
+
+### Changed — portrait mobile hero (per-clip reframing)
+
+- The hero's four showroom clips were re-cropped individually for mobile so the subjects stay in
+  frame (clip 2's couple sits right-of-centre; clips 3–4 centre-left), then re-joined into a
+  portrait `hero-mobile.mp4` (730×1072, 2.1 MB) + `hero-poster-mobile.jpg`.
+- New `HeroVideo` client component serves the portrait cut on mobile and the 16:9 master on
+  desktop, choosing the source after mount so only the matching file downloads. Reduced-motion
+  still suppresses the video.
+
 ## [1.15.0] — 2026-06-30
 
 ### Added — "Room visualiser" menu link (configurable)
