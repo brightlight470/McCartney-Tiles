@@ -3,6 +3,15 @@
 All notable changes to the McCartney Tiles Phase-1 build are recorded here.
 Versioning follows the client convention: **minor = 1.x**, **major = x.1**.
 
+## [1.15.0] — 2026-06-30
+
+### Added — "Room visualiser" menu link (configurable)
+
+- Header and footer gain a **Room visualiser** link when `NEXT_PUBLIC_ROOMVO_URL` is set, opening
+  that URL in a new tab. Because Roomvo's embedded widget is bound to the live domain (it 400s on
+  the preview/any other domain), a menu link to a Roomvo-hosted URL is the way to reach the
+  visualiser from the preview. `NavLink` now handles external nav items.
+
 ## [1.14.0] — 2026-06-29
 
 ### Added — Roomvo assistant (mobile only)

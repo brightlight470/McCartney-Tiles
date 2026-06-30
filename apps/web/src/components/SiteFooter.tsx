@@ -1,6 +1,5 @@
-import Link from 'next/link'
 import { Container } from '@mccartney/ui'
-import { NAV } from './SiteHeader'
+import { NAV, NavLink } from './SiteHeader'
 import { RegionSwitcher } from './RegionSwitcher'
 import { getRegion } from '@/lib/region.server'
 import { REGION_LABELS } from '@/lib/region'
@@ -21,9 +20,7 @@ export async function SiteFooter() {
         </div>
         <nav aria-label="Footer" className="flex flex-wrap gap-x-8 gap-y-2 text-sm">
           {NAV.map((item) => (
-            <Link key={item.href} href={item.href} className="text-slate hover:text-brand-blue">
-              {item.label}
-            </Link>
+            <NavLink key={item.href} item={item} className="text-slate hover:text-brand-blue" />
           ))}
         </nav>
       </Container>
