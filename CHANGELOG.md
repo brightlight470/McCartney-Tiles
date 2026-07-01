@@ -3,6 +3,41 @@
 All notable changes to the McCartney Tiles Phase-1 build are recorded here.
 Versioning follows the client convention: **minor = 1.x**, **major = x.1**.
 
+## [2.1.0] — 2026-07-01
+
+Approved Range → Product(colour) → size architecture rolled out to the live app (the /preview
+mockups are now realised on the real routes).
+
+### Changed — data model: product = colour, sizes as an array
+
+- `Products` is now colour-level: added `colour` and a `sizes` array (sizeMm, sizeBand, thickness,
+  tiles/box, m²/box, tiles/m²); the old per-size top-level columns were removed. Migration
+  `migrate:colours` collapsed the 103 per-size rows into 95 colour-products (grouping by range +
+  size-stripped name), keeping each group's representative id (stock re-pointed onto it) so stock
+  survived; saved baskets were cleared (test data). Legacy columns dropped via
+  `drop-legacy-size-cols`. Search index carries multi-value `sizesMm` / `sizeBands` + `colour`.
+
+### Changed — information architecture + navigation
+
+- New **/products** page: the faceted catalogue (moved from /ranges), one card per colour with the
+  size stack + suitability overlay, accordion filters.
+- **/ranges** is now a range-family browse grid; **/ranges/[slug]** is the range page (hero →
+  feature images → two-line copy → colour cards).
+- **/product/[slug]**: feature images, colour-level spec, sizes as black-outline tiles, and the
+  large image halved (2:1).
+- Nav shows both **Products** and **Ranges**. 301s: legacy facet/size/all-ranges → /products,
+  bathroom slugs → /bathrooms, and 94 old per-size product slugs → their new colour slug.
+
+### Added — auto-crop on image upload (#8)
+
+- Media gains an opt-in **Crop to tile**: on upload it trims the white border and squares the
+  master (sharp) before Payload derives sizes. Off by default (logos/hero/lifestyle unaffected).
+
+### Note
+
+- Backend/PIM ergonomics beyond this (bulk range→colour→size authoring UX) can follow; the data
+  model + auto-crop groundwork for it is in place.
+
 ## [2.0.2] — 2026-06-30
 
 ### Fixed — product card white gap (Range/Products mockups)

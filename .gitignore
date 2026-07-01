@@ -49,4 +49,7 @@ playwright-report/
 /.cache/
 /tools/
 
+# One-off migration dumps (regenerated from a running CMS)
+apps/cms/.migration/
+
 .vercel

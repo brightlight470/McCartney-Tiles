@@ -81,12 +81,11 @@ export const ingestPublishEndpoint: Endpoint = {
       for (const p of r.products) {
         if (!p.name) continue
         const productSlug = slugify(p.name)
+        const sizeMm = clean(p.sizeMm)
         const data = {
           range: rangeId as number,
           name: p.name,
           slug: productSlug,
-          sizeMm: clean(p.sizeMm),
-          sizeBand: clean(p.sizeBand),
           application: clean(p.application),
           colourGroup: clean(p.colourGroup),
           finish: clean(p.finish),
@@ -94,6 +93,8 @@ export const ingestPublishEndpoint: Endpoint = {
           material: clean(p.material) ?? 'porcelain',
           edge: clean(p.edge),
           format: clean(p.format),
+          // Colour-level model: the ingested size becomes a single entry in the sizes array.
+          sizes: sizeMm ? [{ sizeMm, sizeBand: clean(p.sizeBand) }] : [],
         }
         const existingProduct = await req.payload.find({
           collection: 'products',

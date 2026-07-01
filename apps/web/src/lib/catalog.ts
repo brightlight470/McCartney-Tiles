@@ -38,13 +38,22 @@ export interface Range {
   seo?: { title?: string | null; description?: string | null } | null
 }
 
+export interface ProductSize {
+  sizeMm?: string | null
+  sizeBand?: string | null
+  thicknessMm?: number | null
+  tilesPerBox?: number | null
+  m2PerBox?: number | null
+  tilesPerM2?: number | null
+}
+
 export interface Product {
   id: string | number
   name: string
+  /** Short colour/style label, e.g. "Grey". */
+  colour?: string | null
   slug: string
   range?: Range | string | number | null
-  sizeMm?: string | null
-  sizeBand?: string | null
   application?: string | null
   colourGroup?: string | null
   finish?: string | null
@@ -52,11 +61,26 @@ export interface Product {
   material?: string | null
   edge?: string | null
   format?: string | null
-  thicknessMm?: number | null
-  tilesPerBox?: number | null
-  m2PerBox?: number | null
-  tilesPerM2?: number | null
+  /** The sizes this colour is available in (smallest first). */
+  sizes?: ProductSize[] | null
   images?: MediaRef[] | null
+}
+
+/** Distinct size dimensions for a product, smallest first (by area). */
+export function productSizesMm(product: Product): string[] {
+  const seen = new Set<string>()
+  const list = (product.sizes ?? [])
+    .map((s) => s.sizeMm)
+    .filter((s): s is string => {
+      if (typeof s !== 'string' || seen.has(s)) return false
+      seen.add(s)
+      return true
+    })
+  const area = (s: string): number => {
+    const m = s.match(/(\d+)\s*[x×]\s*(\d+)/i)
+    return m ? Number(m[1]) * Number(m[2]) : Number.POSITIVE_INFINITY
+  }
+  return list.sort((a, b) => area(a) - area(b))
 }
 
 export interface Showroom {

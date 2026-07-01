@@ -8,9 +8,11 @@ export interface ProductDocument {
   rangeName: string
   rangeSlug: string
   name: string
+  colour: string | null
   slug: string
-  sizeMm: string | null
-  sizeBand: string | null
+  /** Sizes this colour comes in (multi-value — a product spans several sizes now). */
+  sizesMm: string[]
+  sizeBands: string[]
   application: string | null
   /** Suitability as a multi-value facet: any of 'wall' | 'floor' | 'outdoor'. */
   applications: string[]
@@ -56,9 +58,10 @@ export interface IndexableProduct {
   rangeName: string
   rangeSlug: string
   name: string
+  colour?: string | null
   slug: string
-  sizeMm?: string | null
-  sizeBand?: string | null
+  sizesMm?: string[] | null
+  sizeBands?: string[] | null
   application?: string | null
   applications?: string[] | null
   colourGroup?: string | null
@@ -83,9 +86,10 @@ export function toProductDocument(p: IndexableProduct): ProductDocument {
     rangeName: p.rangeName,
     rangeSlug: p.rangeSlug,
     name: p.name,
+    colour: p.colour ?? null,
     slug: p.slug,
-    sizeMm: p.sizeMm ?? null,
-    sizeBand: p.sizeBand ?? null,
+    sizesMm: p.sizesMm ?? [],
+    sizeBands: p.sizeBands ?? [],
     application: p.application ?? null,
     applications: p.applications ?? [],
     colourGroup: p.colourGroup ?? null,

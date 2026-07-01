@@ -22,7 +22,8 @@
     "migrate:taxonomy": "tsx src/migrate-taxonomy.ts",
     "migrate:images": "tsx src/migrate-product-images.ts",
     "migrate:images:manifest": "tsx src/migrate-images-manifest.ts",
-    "migrate:application": "tsx src/migrate-application.ts"
+    "migrate:application": "tsx src/migrate-application.ts",
+    "migrate:colours": "tsx src/migrate-product-colours.ts"
   },
   "dependencies": {
     "@mccartney/db": "workspace:*",
@@ -40,8 +41,10 @@
   },
   "devDependencies": {
     "@types/node": "^26.0.0",
+    "@types/pg": "^8.20.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
+    "pg": "^8.22.0",
     "tsx": "^4.22.4",
     "typescript": "^5.9.3"
   }

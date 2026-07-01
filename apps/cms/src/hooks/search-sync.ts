@@ -5,10 +5,10 @@ import { deleteProducts, toProductDocument, upsertProducts } from '@mccartney/se
 interface ProductLike {
   id: string | number
   name: string
+  colour?: string | null
   slug: string
   range: string | number | { slug?: string; name?: string; showOnWebsite?: boolean }
-  sizeMm?: string | null
-  sizeBand?: string | null
+  sizes?: { sizeMm?: string | null; sizeBand?: string | null }[] | null
   application?: string | null
   colourGroup?: string | null
   finish?: string | null
@@ -16,6 +16,11 @@ interface ProductLike {
   material?: string | null
   edge?: string | null
   format?: string | null
+}
+
+/** De-duplicated, order-preserving list of non-empty values. */
+function uniq(values: (string | null | undefined)[]): string[] {
+  return [...new Set(values.filter((v): v is string => Boolean(v)))]
 }
 
 /**
@@ -42,11 +47,12 @@ export const syncProductToSearch: CollectionAfterChangeHook = async ({ doc, req 
       toProductDocument({
         id,
         name: p.name,
+        colour: p.colour,
         slug: p.slug,
         rangeName: typeof range === 'object' ? (range.name ?? '') : '',
         rangeSlug: typeof range === 'object' ? (range.slug ?? '') : '',
-        sizeMm: p.sizeMm,
-        sizeBand: p.sizeBand,
+        sizesMm: uniq((p.sizes ?? []).map((s) => s.sizeMm)),
+        sizeBands: uniq((p.sizes ?? []).map((s) => s.sizeBand)),
         application: p.application,
         colourGroup: p.colourGroup,
         finish: p.finish,

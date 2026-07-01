@@ -76,10 +76,17 @@ async function main(): Promise<void> {
           range: rangeId as number,
           name: p.name,
           slug: p.slug,
-          sizeMm: p.sizeMm,
-          tilesPerBox: p.tilesPerBox,
-          m2PerBox: p.m2PerBox,
-          tilesPerM2: p.tilesPerM2,
+          // New colour-level model: the seed's single size becomes one entry in the sizes array.
+          sizes: p.sizeMm
+            ? [
+                {
+                  sizeMm: p.sizeMm,
+                  tilesPerBox: p.tilesPerBox,
+                  m2PerBox: p.m2PerBox,
+                  tilesPerM2: p.tilesPerM2,
+                },
+              ]
+            : [],
         },
       })
       id = created.id

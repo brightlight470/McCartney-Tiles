@@ -8,9 +8,17 @@ import { SiteHeader } from '@/components/SiteHeader'
 import { SiteFooter } from '@/components/SiteFooter'
 import { RoomvoVisualiser } from '@/components/RoomvoVisualiser'
 import { AddToBasketButton } from '@/components/AddToBasketButton'
-import { ApplicationSymbol } from '@/components/ApplicationSymbol'
+import { SuitabilityOverlay } from '@/components/SuitabilityOverlay'
+import { SizeTiles } from '@/components/SizeTiles'
 import { JsonLd } from '@/components/JsonLd'
-import { getProductBySlug, getStockForProduct, mediaUrl, type Product, type Range } from '@/lib/catalog'
+import {
+  getProductBySlug,
+  getStockForProduct,
+  mediaUrl,
+  productSizesMm,
+  type Product,
+  type Range,
+} from '@/lib/catalog'
 import { getCurrentUser, getProductPrice } from '@/lib/auth'
 
 const VALID_STATUS: ReadonlySet<string> = new Set<StockStatus>([
@@ -50,17 +58,13 @@ function specRows(product: Product): { label: string; value: string }[] {
     if (value !== null && value !== undefined && value !== '')
       rows.push({ label, value: String(value) })
   }
-  push('Size', product.sizeMm ? `${product.sizeMm} mm` : null)
+  push('Colour', product.colour ?? (product.colourGroup ? labelFor('colourGroup', product.colourGroup) : null))
   push('Application', product.application ? labelFor('application', product.application) : null)
-  push('Colour', product.colourGroup ? labelFor('colourGroup', product.colourGroup) : null)
   push('Finish', product.finish ? labelFor('finish', product.finish) : null)
   push('Effect', product.effect ? labelFor('effect', product.effect) : null)
   push('Material', product.material ? labelFor('material', product.material) : null)
   push('Edge', product.edge ? labelFor('edge', product.edge) : null)
   push('Format', product.format ? labelFor('format', product.format) : null)
-  push('Thickness', product.thicknessMm ? `${product.thicknessMm} mm` : null)
-  push('Tiles per box', product.tilesPerBox)
-  push('m² per box', product.m2PerBox)
   return rows
 }
 
@@ -70,7 +74,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   if (!product) notFound()
   const range = rangeOf(product)
   const rows = specRows(product)
-  const image = mediaUrl(product.images?.[0], 'card') ?? mediaUrl(range?.heroImage, 'card')
+  const gallery = (product.images ?? [])
+    .map((im) => mediaUrl(im, 'card'))
+    .filter((u): u is string => Boolean(u))
+  const image = gallery[0] ?? mediaUrl(range?.heroImage, 'card')
+  const thumbs = gallery.slice(1, 4)
+  const sizes = productSizesMm(product)
 
   const [user, price, stock] = await Promise.all([
     getCurrentUser(),
@@ -113,16 +122,37 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </nav>
 
           <div className="mt-6 grid grid-cols-1 gap-10 lg:grid-cols-2">
-            <div className="relative aspect-square overflow-hidden rounded border border-border bg-mist">
-              {image ? (
-                <Image
-                  src={image}
-                  alt={product.name}
-                  fill
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="object-cover"
-                  priority
-                />
+            <div>
+              <div className="relative aspect-[2/1] overflow-hidden rounded border border-border bg-mist">
+                {image ? (
+                  <Image
+                    src={image}
+                    alt={product.name}
+                    fill
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="object-cover"
+                    priority
+                  />
+                ) : null}
+                <SuitabilityOverlay application={product.application} size={48} />
+              </div>
+              {thumbs.length > 0 ? (
+                <div className="mt-3 grid grid-cols-3 gap-3">
+                  {thumbs.map((src, i) => (
+                    <div
+                      key={src}
+                      className="relative aspect-square overflow-hidden rounded border border-border bg-mist"
+                    >
+                      <Image
+                        src={src}
+                        alt={`${product.name} view ${i + 2}`}
+                        fill
+                        sizes="20vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
               ) : null}
             </div>
 
@@ -134,8 +164,18 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 {stock.inStock && stock.totalM2 ? (
                   <span className="tabular text-sm text-slate">{stock.totalM2} m² in stock</span>
                 ) : null}
-                <ApplicationSymbol application={product.application} />
               </div>
+
+              {sizes.length > 0 ? (
+                <div className="mt-8">
+                  <h2 className="font-display text-sm font-semibold tracking-wide text-ink uppercase">
+                    Available sizes
+                  </h2>
+                  <div className="mt-4">
+                    <SizeTiles sizes={sizes} variant="detail" />
+                  </div>
+                </div>
+              ) : null}
 
               <div className="mt-6 rounded border border-border bg-white p-4">
                 {canSeePrice ? (

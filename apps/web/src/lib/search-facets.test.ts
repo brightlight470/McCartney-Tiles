@@ -33,7 +33,7 @@ describe('toggleHref', () => {
     expect(href).not.toContain('page=')
   })
   it('removing the last value returns the bare path', () => {
-    expect(toggleHref({ colour: 'grey' }, 'colour', 'grey')).toBe('/ranges')
+    expect(toggleHref({ colour: 'grey' }, 'colour', 'grey')).toBe('/products')
   })
 })
 

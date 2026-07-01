@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { StockBadge } from '@mccartney/ui'
-import { ApplicationSymbol } from '@/components/ApplicationSymbol'
+import { SuitabilityOverlay } from '@/components/SuitabilityOverlay'
+import { SizeTiles } from '@/components/SizeTiles'
 import type { StockStatus } from '@mccartney/ui'
 import type { ProductDocument } from '@mccartney/search'
 
@@ -13,11 +14,15 @@ const VALID: ReadonlySet<string> = new Set<StockStatus>([
   'clearance',
 ])
 
+const cap = (s?: string | null): string | null =>
+  s ? s.charAt(0).toUpperCase() + s.slice(1) : null
+
 export function ProductCard({ product }: { product: ProductDocument }) {
   const status =
     product.stockStatus && VALID.has(product.stockStatus)
       ? (product.stockStatus as StockStatus)
       : null
+  const sub = [cap(product.effect), cap(product.finish)].filter(Boolean).join(' · ')
   return (
     <Link
       href={`/product/${product.slug}`}
@@ -33,16 +38,17 @@ export function ProductCard({ product }: { product: ProductDocument }) {
             className="object-cover"
           />
         ) : null}
+        <SuitabilityOverlay application={product.application} size={40} />
+        {product.sizesMm.length ? <SizeTiles sizes={product.sizesMm} variant="card" /> : null}
       </div>
       <div className="p-4">
         <p className="font-display font-semibold text-ink">{product.name}</p>
-        {product.sizeMm ? (
-          <p className="tabular mt-1 text-sm text-slate">{product.sizeMm} mm</p>
+        {sub ? <p className="mt-1 text-sm text-slate">{sub}</p> : null}
+        {status ? (
+          <div className="mt-3">
+            <StockBadge status={status} />
+          </div>
         ) : null}
-        <div className="mt-3 flex items-center gap-2">
-          {status ? <StockBadge status={status} /> : null}
-          <ApplicationSymbol application={product.application} />
-        </div>
       </div>
     </Link>
   )

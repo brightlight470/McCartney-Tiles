@@ -1,128 +1,74 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { Container } from '@mccartney/ui'
-import { searchProducts, type SearchResult } from '@mccartney/search'
 import { SiteHeader } from '@/components/SiteHeader'
 import { SiteFooter } from '@/components/SiteFooter'
-import { FacetSidebar } from '@/components/search/FacetSidebar'
-import { FilterDrawer } from '@/components/search/FilterDrawer'
-import { ActiveFilters } from '@/components/search/ActiveFilters'
-import { Pagination } from '@/components/search/Pagination'
-import { SearchBox } from '@/components/search/SearchBox'
-import { ProductCard } from '@/components/search/ProductCard'
-import {
-  activeFilters,
-  isActive,
-  parseSearchParams,
-  sortHref,
-  type RawParams,
-} from '@/lib/search-facets'
+import { getPublishedRanges, mediaUrl } from '@/lib/catalog'
 
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'All ranges — faceted tile search',
+  title: 'Ranges — porcelain and ceramic tile families',
   description:
-    'Search the full McCartney Tiles catalogue by size, colour, finish, effect, material, application, edge and stock.',
+    'Browse the McCartney Tiles ranges. Each range is a tile family with its colours and sizes, held in stock and supplied across Ireland.',
 }
 
-const EMPTY: SearchResult = {
-  hits: [],
-  total: 0,
-  page: 1,
-  totalPages: 1,
-  facetDistribution: {},
-}
-
-const SORTS: { key: string | undefined; label: string }[] = [
-  { key: undefined, label: 'Relevance' },
-  { key: 'name', label: 'Name A–Z' },
-  { key: 'price', label: 'Price band' },
-]
-
-export default async function RangesPage({ searchParams }: { searchParams: Promise<RawParams> }) {
-  const sp = await searchParams
-  const { q, page, sort, filters } = parseSearchParams(sp)
-
-  let result = EMPTY
-  let unavailable = false
-  try {
-    result = await searchProducts({ query: q, filters, sort, page, hitsPerPage: 24 })
-  } catch {
-    unavailable = true
-  }
-
-  const activeSort = typeof sp.sort === 'string' ? sp.sort : undefined
-  const activeCount = activeFilters(sp).length + (isActive(sp, 'stock', 'in') ? 1 : 0)
+export default async function RangesPage() {
+  const ranges = await getPublishedRanges()
 
   return (
     <>
       <SiteHeader />
       <main className="py-12">
         <Container>
-          <h1 className="text-3xl font-bold tracking-tight text-ink">All ranges</h1>
-          <p className="mt-2 text-slate">
-            One search across every range — combine filters; results update live.
+          <h1 className="text-3xl font-bold tracking-tight text-ink">Ranges</h1>
+          <p className="mt-2 max-w-2xl text-slate">
+            Each range is a tile family. Open one to see its colours and the sizes they come in, or
+            search every colour on the{' '}
+            <Link href="/products" className="font-medium text-brand-blue hover:underline">
+              Products
+            </Link>{' '}
+            page.
           </p>
 
-          <div className="mt-8 max-w-2xl">
-            <SearchBox sp={sp} />
-          </div>
-
-          <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-[16rem_1fr]">
-            <FilterDrawer activeCount={activeCount}>
-              <FacetSidebar sp={sp} distribution={result.facetDistribution} />
-            </FilterDrawer>
-
-            <section aria-label="Results">
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <p className="tabular text-sm text-slate">
-                  {result.total} {result.total === 1 ? 'product' : 'products'}
-                </p>
-                <div className="flex items-center gap-1 text-sm">
-                  <span className="text-slate">Sort:</span>
-                  {SORTS.map((s) => {
-                    const isActive = activeSort === s.key || (!activeSort && !s.key)
-                    return (
-                      <Link
-                        key={s.label}
-                        href={sortHref(sp, s.key)}
-                        className={`rounded-sm px-2 py-1 ${
-                          isActive ? 'font-semibold text-brand-blue' : 'text-slate hover:text-ink'
-                        }`}
-                      >
-                        {s.label}
-                      </Link>
-                    )
-                  })}
-                </div>
-              </div>
-
-              <div className="mt-4">
-                <ActiveFilters sp={sp} />
-              </div>
-
-              {unavailable ? (
-                <p className="mt-12 rounded border border-border bg-white p-6 text-slate">
-                  Search is starting up. The catalogue index is not yet available — once Meilisearch
-                  is running and the catalogue is seeded, results appear here.
-                </p>
-              ) : result.hits.length === 0 ? (
-                <p className="mt-12 rounded border border-border bg-white p-6 text-slate">
-                  No tiles match these filters. Try removing a filter or widening your search.
-                </p>
-              ) : (
-                <>
-                  <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4">
-                    {result.hits.map((hit) => (
-                      <ProductCard key={hit.id} product={hit} />
-                    ))}
-                  </div>
-                  <Pagination sp={sp} page={result.page} totalPages={result.totalPages} />
-                </>
-              )}
-            </section>
-          </div>
+          {ranges.length === 0 ? (
+            <p className="mt-12 rounded border border-border bg-white p-6 text-slate">
+              Ranges are being published. Once the catalogue is seeded they appear here.
+            </p>
+          ) : (
+            <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4">
+              {ranges.map((range) => {
+                const hero = mediaUrl(range.heroImage, 'card')
+                return (
+                  <li key={range.id}>
+                    <Link
+                      href={`/ranges/${range.slug}`}
+                      className="group block overflow-hidden rounded border border-border bg-white transition-colors hover:border-brand-blue focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:outline-none"
+                    >
+                      <div className="relative aspect-square bg-mist">
+                        {hero ? (
+                          <Image
+                            src={hero}
+                            alt=""
+                            fill
+                            sizes="(min-width: 1280px) 20vw, (min-width: 640px) 33vw, 50vw"
+                            className="object-cover"
+                          />
+                        ) : null}
+                      </div>
+                      <div className="p-4">
+                        <p className="font-display font-semibold text-ink">{range.name}</p>
+                        {range.description ? (
+                          <p className="mt-1 line-clamp-2 text-sm text-slate">{range.description}</p>
+                        ) : null}
+                      </div>
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          )}
         </Container>
       </main>
       <SiteFooter />

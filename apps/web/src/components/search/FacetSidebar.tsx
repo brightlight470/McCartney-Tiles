@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import type { ReactNode } from 'react'
 import { FACETS, isActive, toggleHref, type RawParams } from '@/lib/search-facets'
 
 interface Props {

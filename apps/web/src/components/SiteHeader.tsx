@@ -13,6 +13,7 @@ export interface NavItem {
 const ROOMVO_URL = process.env.NEXT_PUBLIC_ROOMVO_URL
 
 export const NAV: NavItem[] = [
+  { label: 'Products', href: '/products' },
   { label: 'Ranges', href: '/ranges' },
   { label: 'Bathrooms', href: '/bathrooms' },
   { label: 'Showrooms', href: '/showrooms' },

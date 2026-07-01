@@ -25,13 +25,13 @@ export const FACETS: FacetDef[] = [
   { param: 'material', attr: 'material', label: 'Material', options: taxOptions('material') },
   { param: 'application', attr: 'applications', label: 'Application', options: APPLICATION_OPTIONS },
   { param: 'edge', attr: 'edge', label: 'Edge', options: taxOptions('edge') },
-  { param: 'size', attr: 'sizeBand', label: 'Size', options: taxOptions('sizeBand') },
+  { param: 'size', attr: 'sizeBands', label: 'Size', options: taxOptions('sizeBand') },
   { param: 'format', attr: 'format', label: 'Format', options: taxOptions('format') },
 ]
 
 const ALL_PARAMS = [...FACETS.map((f) => f.param), 'stock', 'q', 'sort', 'page']
 
-const BASE = '/ranges'
+const BASE = '/products'
 
 function listParam(v: string | string[] | undefined): string[] {
   if (!v) return []

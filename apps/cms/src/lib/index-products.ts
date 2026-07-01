@@ -33,10 +33,10 @@ interface MediaRef {
 interface ProductRow {
   id: string | number
   name: string
+  colour?: string | null
   slug: string
   range?: RangeRef | string | number | null
-  sizeMm?: string | null
-  sizeBand?: string | null
+  sizes?: { sizeMm?: string | null; sizeBand?: string | null }[] | null
   application?: string | null
   colourGroup?: string | null
   finish?: string | null
@@ -46,6 +46,10 @@ interface ProductRow {
   format?: string | null
   images?: (MediaRef | string | number)[] | null
 }
+
+const uniq = (values: (string | null | undefined)[]): string[] => [
+  ...new Set(values.filter((v): v is string => Boolean(v))),
+]
 
 const idOf = (rel: StockRow['product']): string =>
   typeof rel === 'object' ? String(rel.id) : String(rel)
@@ -120,14 +124,20 @@ export async function indexProductsFromDb(
       continue
     }
     const stock = deriveStock(stockByProduct.get(String(p.id)) ?? [])
+    const sizes = Array.isArray(p.sizes) ? p.sizes : []
+    const sizesMm = uniq(sizes.map((s) => s.sizeMm))
+    const sizeBands = uniq(
+      sizes.map((s) => s.sizeBand ?? classifySizeBand(s.sizeMm ?? null).value),
+    )
     const doc: IndexableProduct = {
       id: String(p.id),
       name: p.name,
+      colour: p.colour,
       slug: p.slug,
       rangeName: range?.name ?? '',
       rangeSlug: range?.slug ?? '',
-      sizeMm: p.sizeMm,
-      sizeBand: p.sizeBand ?? classifySizeBand(p.sizeMm ?? null).value,
+      sizesMm,
+      sizeBands,
       application: p.application,
       colourGroup: p.colourGroup ?? classifyColour(p.name).value,
       finish: p.finish ?? classifyFinish(p.name).value,
